@@ -15,37 +15,32 @@ import org.bukkit.entity.Player;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static me.redstom.beaconwarp.common.TextConstants.*;
+import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
-public class RenamingMenu extends Menu<AnvilGui> {
+public class RenamingMenu
+        extends Menu<AnvilGui> {
 
     private static final Component TITLE = SHORT_PREFIX.append(Component.text("Renommer"));
 
-    @Getter
-    private final Repositories repositories;
-    @Getter
-    private final Warp warp;
-    @Getter
-    private final AtomicReference<String> name;
+    @Getter private final Repositories            repositories;
+    @Getter private final Warp                    warp;
+    @Getter private final AtomicReference<String> name;
 
-    public RenamingMenu(
-            Repositories repositories,
-            Warp warp) {
+    public RenamingMenu(Repositories repositories, Warp warp) {
         super(new AnvilGui(ComponentHolder.of(TITLE)));
 
         this.repositories = repositories;
-        this.warp = warp;
+        this.warp         = warp;
 
         this.name = new AtomicReference<>(warp.name());
 
         init();
     }
 
-    @Override
-    public void init() {
+    @Override public void init() {
         Item<?> beacon;
         Item<?> confirm;
-        beacon = new BeaconItem(this);
+        beacon  = new BeaconItem(this);
         confirm = new ConfirmItem(this);
 
         StaticPane input = new StaticPane(0, 0, 1, 1);
@@ -54,10 +49,8 @@ public class RenamingMenu extends Menu<AnvilGui> {
         StaticPane output = new StaticPane(0, 0, 1, 1);
         output.addItem(confirm.item(), 0, 0);
 
-        gui.getFirstItemComponent()
-           .addPane(input);
-        gui.getResultComponent()
-           .addPane(output);
+        gui.getFirstItemComponent().addPane(input);
+        gui.getResultComponent().addPane(output);
 
         gui.setOnNameInputChanged(name::set);
         gui.setOnClose(event -> new EditionMenu(repositories, warp).open((Player) event.getPlayer()));

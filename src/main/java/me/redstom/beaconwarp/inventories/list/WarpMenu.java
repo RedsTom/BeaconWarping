@@ -5,38 +5,36 @@ import com.github.stefvanschie.inventoryframework.gui.type.HopperGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import lombok.Getter;
 import me.redstom.beaconwarp.inventories.Menu;
-import me.redstom.beaconwarp.items.list.TeleportItem;
 import me.redstom.beaconwarp.items.CancelItem;
+import me.redstom.beaconwarp.items.list.TeleportItem;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
 import net.kyori.adventure.text.Component;
 
 import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
-public class WarpMenu extends Menu<HopperGui> {
+@Getter
+public class WarpMenu
+        extends Menu<HopperGui> {
 
     private static final Component TITLE = SHORT_PREFIX.append(Component.text("Warp"));
 
-    @Getter
     private final Repositories repositories;
 
-    @Getter
     private final Warp warp;
 
-    public WarpMenu(Repositories repositories,
-                    Warp warp) {
+    public WarpMenu(Repositories repositories, Warp warp) {
         super(new HopperGui(ComponentHolder.of(TITLE)));
 
         this.repositories = repositories;
-        this.warp = warp;
+        this.warp         = warp;
 
         init();
     }
 
-    @Override
-    public void init() {
+    @Override public void init() {
         TeleportItem teleport = new TeleportItem(this);
-        CancelItem cancel = new CancelItem(this, () -> new WarpListMenu(repositories, warp.user()));
+        CancelItem   cancel   = new CancelItem(this, () -> new WarpListMenu(repositories, warp.user()));
 
         StaticPane pane = new StaticPane(0, 0, 5, 1);
         pane.addItem(teleport.item(), 1, 0);
@@ -44,5 +42,4 @@ public class WarpMenu extends Menu<HopperGui> {
 
         gui.getSlotsComponent().addPane(pane);
     }
-
 }

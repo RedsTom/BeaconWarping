@@ -17,52 +17,41 @@ import org.bukkit.event.block.BlockBreakEvent;
 import java.util.Optional;
 
 @Singleton
-public class BlockBreakListener implements Listener {
+public class BlockBreakListener
+        implements Listener {
 
     @Inject private Repositories repositories;
 
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
-        if (event.getBlock()
-                 .getType() != Material.BEACON) {
+    @EventHandler public void onBlockBreak(BlockBreakEvent event) {
+        if (event.getBlock().getType() != Material.BEACON) {
             return;
         }
 
-        Optional<Warp> warp = repositories.warps().findWarpOn(event.getBlock()
-                                                             .getLocation());
-        if (!warp.isPresent()) {
+        Optional<Warp> warp = repositories.warps().findWarpOn(event.getBlock().getLocation());
+        if (warp.isEmpty()) {
             return;
         }
 
         Player player = event.getPlayer();
-        if (!warp.get()
-                 .user()
-                 .uniqueId()
-                 .equals(player.getUniqueId()) && !player.hasPermission("beacon.admin")) {
+        if (!warp.get().user().uniqueId().equals(player.getUniqueId()) && !player.hasPermission("beacon.admin")) {
             event.setCancelled(true);
 
-            OfflinePlayer other = Bukkit.getOfflinePlayer(warp.get()
-                                                              .user()
-                                                              .uniqueId());
-            player.sendMessage(TextConstants.PREFIX.append(Component.text("Vous ne pouvez pas casser ce bloc car il abrite un warp qui appartient à ")
-                                                                    .color(TextConstants.RED)
-                                                                    .append(Component.text(other.getName() == null
-                                                                                             ? "un joueur inconnu"
-                                                                                             : other.getName())
-                                                                                     .color(TextConstants.LIGHT_BLUE))
-                                                                    .append(Component.text("."))));
+            OfflinePlayer other = Bukkit.getOfflinePlayer(warp.get().user().uniqueId());
+            player.sendMessage(TextConstants.PREFIX.append(Component.text(
+                            "Vous ne pouvez pas casser ce bloc car il abrite un warp qui appartient à ")
+                    .color(TextConstants.RED)
+                    .append(Component.text(other.getName() == null ? "un joueur " + "inconnu" : other.getName())
+                            .color(TextConstants.LIGHT_BLUE))
+                    .append(Component.text("."))));
 
             return;
         }
 
         repositories.warps().delete(warp.get());
         player.sendMessage(TextConstants.PREFIX.append(Component.text("Le warp")
-                                                                .appendSpace()
-                                                                .append(Component.text(warp.get()
-                                                                                           .name())
-                                                                                 .color(TextConstants.DARK_BLUE))
-                                                                .appendSpace()
-                                                                .append(Component.text("a bien été supprimé !"))));
+                .appendSpace()
+                .append(Component.text(warp.get().name()).color(TextConstants.DARK_BLUE))
+                .appendSpace()
+                .append(Component.text("a bien été supprimé !"))));
     }
-
 }

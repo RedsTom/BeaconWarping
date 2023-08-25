@@ -16,12 +16,9 @@ import java.util.UUID;
 @Table(name = "BeaconUser")
 public class User {
 
-    @Id
-    private UUID uniqueId;
+    @Id private UUID uniqueId;
 
     private boolean informed;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Warp> warps;
-
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER) private List<Warp> warps;
 }

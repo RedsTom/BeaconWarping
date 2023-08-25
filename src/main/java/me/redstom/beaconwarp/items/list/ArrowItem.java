@@ -1,7 +1,6 @@
 package me.redstom.beaconwarp.items.list;
 
 import com.github.stefvanschie.inventoryframework.pane.PaginatedPane;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import me.redstom.beaconwarp.common.Paginator;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
@@ -11,36 +10,31 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class ArrowItem extends Item<Menu<?>> {
+public class ArrowItem
+        extends Item<Menu<?>> {
 
-    private final Direction direction;
-    private final Paginator<?> paginator;
+    private final Direction     direction;
+    private final Paginator<?>  paginator;
     private final PaginatedPane pane;
 
-    public ArrowItem(Menu<?> menu,
-                     Direction direction,
-                     Paginator<?> paginator,
-                     PaginatedPane pane) {
+    public ArrowItem(Menu<?> menu, Direction direction, Paginator<?> paginator, PaginatedPane pane) {
         super(menu, Material.ARROW);
 
         this.direction = direction;
         this.paginator = paginator;
-        this.pane = pane;
+        this.pane      = pane;
 
         init();
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Page %s".formatted(direction == Direction.PREVIOUS
-                ? "précédente"
-                : "suivante")));
+    @Override protected ItemBuilder update(ItemBuilder item) {
+        item.displayName(Component.text("Page %s".formatted(
+                direction == Direction.PREVIOUS ? "précédente" : "suivante")));
 
         return item;
     }

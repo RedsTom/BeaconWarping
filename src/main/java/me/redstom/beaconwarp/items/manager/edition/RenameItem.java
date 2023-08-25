@@ -11,7 +11,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static me.redstom.beaconwarp.common.TextConstants.LIGHT_BLUE;
 
-public class RenameItem extends Item<EditionMenu> {
+public class RenameItem
+        extends Item<EditionMenu> {
 
     public RenameItem(EditionMenu menu) {
         super(menu, Material.NAME_TAG);
@@ -20,21 +21,15 @@ public class RenameItem extends Item<EditionMenu> {
         update();
     }
 
-    @Override
-    public void init() {
+    @Override public void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text("Renommer"));
 
-        item.lore(
-                Component.text("Changer le nom de votre warp."),
-                Component.text("Nom actuel : ")
-                         .append(Component.text(menu().warp()
-                                                      .name())
-                                          .color(LIGHT_BLUE)));
+        item.lore(Component.text("Changer le nom de votre warp."),
+                Component.text("Nom actuel : ").append(Component.text(menu().warp().name()).color(LIGHT_BLUE)));
 
         return item;
     }

@@ -11,5 +11,4 @@ public class Repositories {
 
     @Inject private UserRepository users;
     @Inject private WarpRepository warps;
-
 }

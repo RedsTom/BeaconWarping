@@ -9,15 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class PWarpCommand implements CommandExecutor {
+public class PWarpCommand
+        implements CommandExecutor {
 
     @Inject private Repositories repositories;
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender,
-                             @NotNull Command command,
-                             @NotNull String label,
-                             @NotNull String[] args) {
+    @Override public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
+                                       @NotNull String[] args) {
 
         new PlayerListMenu(repositories).open((Player) sender);
 

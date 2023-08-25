@@ -10,7 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class CreateItem extends Item<CreationMenu> {
+public class CreateItem
+        extends Item<CreationMenu> {
 
     public CreateItem(CreationMenu menu) {
         super(menu, Material.GREEN_WOOL);
@@ -19,13 +20,11 @@ public class CreateItem extends Item<CreationMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text("Créer le warp"));
         item.lore(Component.text("Crée un nouveau warp à votre nom. Votre warp,"),
                 Component.text("une fois créé, pourra téléporter les joueurs"),
@@ -35,8 +34,7 @@ public class CreateItem extends Item<CreationMenu> {
     }
 
     private void onClick(InventoryClickEvent event) {
-        Warp warp = menu().repositories().warps()
-                          .create(menu().user(), menu().location());
+        Warp warp = menu().repositories().warps().create(menu().user(), menu().location());
 
         new EditionMenu(menu().repositories(), warp).open((Player) event.getWhoClicked());
     }

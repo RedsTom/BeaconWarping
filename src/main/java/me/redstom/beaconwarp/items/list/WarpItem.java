@@ -10,12 +10,12 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class WarpItem extends Item<WarpListMenu> {
+public class WarpItem
+        extends Item<WarpListMenu> {
 
     private final Warp warp;
 
-    public WarpItem(WarpListMenu menu,
-                    Warp warp) {
+    public WarpItem(WarpListMenu menu, Warp warp) {
         super(menu, warp.icon());
         this.warp = warp;
 
@@ -23,18 +23,16 @@ public class WarpItem extends Item<WarpListMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text(warp.name()));
 
         if (warp.state() == Warp.State.DISABLED) {
             item.lore(Component.text("Ce warp est desactivé, vous ne pouvez pas vous y téléporter !")
-                               .color(TextConstants.RED));
+                    .color(TextConstants.RED));
         }
 
         return item;

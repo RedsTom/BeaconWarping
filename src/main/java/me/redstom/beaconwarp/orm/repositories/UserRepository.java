@@ -17,13 +17,11 @@ import java.util.UUID;
 
 @Singleton
 public class UserRepository {
+
     @Inject SessionFactory sessionFactory;
 
-    @Transactional
-    public User create(UUID id) {
-        User user = User.builder()
-                        .uniqueId(id)
-                        .build();
+    @Transactional public User create(UUID id) {
+        User user = User.builder().uniqueId(id).build();
 
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
@@ -44,8 +42,7 @@ public class UserRepository {
         return get(id).orElseGet(() -> this.create(id));
     }
 
-    @Transactional
-    public void update(User user) {
+    @Transactional public void update(User user) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             session.merge(user);
@@ -57,14 +54,12 @@ public class UserRepository {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
 
-            CriteriaQuery<User> cr = cb.createQuery(User.class);
-            Root<User> root = cr.from(User.class);
+            CriteriaQuery<User> cr   = cb.createQuery(User.class);
+            Root<User>          root = cr.from(User.class);
 
-            CriteriaQuery<User> query = cr.select(root)
-                                          .where(cb.isNotEmpty(root.get("warps")));
+            CriteriaQuery<User> query = cr.select(root).where(cb.isNotEmpty(root.get("warps")));
 
-            return session.createQuery(query)
-                          .getResultList();
+            return session.createQuery(query).getResultList();
         }
     }
 }

@@ -18,19 +18,17 @@ import static me.redstom.beaconwarp.common.TextConstants.DARK_BLUE;
 import static me.redstom.beaconwarp.common.TextConstants.PREFIX;
 
 @Singleton
-public class BeaconListener implements Listener {
+public class BeaconListener
+        implements Listener {
 
     @Inject private Repositories repositories;
 
-    @EventHandler
-    public void onBeaconLightOff(BeaconDeactivatedEvent event) {
+    @EventHandler public void onBeaconLightOff(BeaconDeactivatedEvent event) {
         if (event.getBeacon() == null) {
             return;
         }
 
-        Optional<Warp> optionalWarp = repositories.warps()
-                                          .findWarpOn(event.getBeacon()
-                                                           .getLocation());
+        Optional<Warp> optionalWarp = repositories.warps().findWarpOn(event.getBeacon().getLocation());
 
         if (optionalWarp.isEmpty()) {
             return;
@@ -40,21 +38,17 @@ public class BeaconListener implements Listener {
         warp.state(Warp.State.DISABLED);
         repositories.warps().update(warp);
 
-        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(warp
-                                                                  .user()
-                                                                  .uniqueId());
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(warp.user().uniqueId());
 
         if (offlinePlayer.isOnline()) {
             Player player = (Player) offlinePlayer;
-            player.sendMessage(
-                    PREFIX.append(Component.text("Le warp")
-                                           .appendSpace()
-                                           .append(Component.text(warp
-                                                                      .name())
-                                                            .color(DARK_BLUE))
-                                           .appendSpace()
-                                           .append(Component.text("a été désactivé : pour le réactiver, veuillez " +
-                                                   "reconstruire son socle et remettre sa visibilité en \"public\" !"))));
+            player.sendMessage(PREFIX.append(Component.text("Le warp")
+                    .appendSpace()
+                    .append(Component.text(warp.name()).color(DARK_BLUE))
+                    .appendSpace()
+                    .append(Component.text(
+                            "a été désactivé : pour le réactiver, veuillez reconstruire son socle et remettre sa " +
+                            "visibilité en \"public\" !"))));
         }
     }
 }

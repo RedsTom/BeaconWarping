@@ -22,42 +22,38 @@ import java.util.List;
 
 import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
-public class WarpListMenu extends Menu<ChestGui> {
+public class WarpListMenu
+        extends Menu<ChestGui> {
 
     private static final Component TITLE = SHORT_PREFIX.append(Component.text("Liste des warps"));
 
-    @Getter
-    private final Repositories repositories;
-    private final User user;
+    @Getter private final Repositories repositories;
+    private final         User         user;
 
-    public WarpListMenu(Repositories repositories,
-                        User user) {
+    public WarpListMenu(Repositories repositories, User user) {
         super(new ChestGui(4, ComponentHolder.of(TITLE)));
 
         this.repositories = repositories;
-        this.user = user;
+        this.user         = user;
 
         init();
     }
 
-    @Override
-    protected void init() {
-        PaginatedPane warps = new PaginatedPane(0, 0, 9, 3);
-        List<Warp> userWarps = user.warps();
-        userWarps.sort(Comparator.comparingInt(a -> a.icon()
-                                                     .ordinal()));
+    @Override protected void init() {
+        PaginatedPane warps     = new PaginatedPane(0, 0, 9, 3);
+        List<Warp>    userWarps = user.warps();
+        userWarps.sort(Comparator.comparingInt(a -> a.icon().ordinal()));
         Paginator<Warp> paginator = new Paginator<>(userWarps, 3 * 9);
 
-        List<OutlinePane> panes = paginator.generatePages(
-                () -> new OutlinePane(0, 0, 9, 3),
+        List<OutlinePane> panes = paginator.generatePages(() -> new OutlinePane(0, 0, 9, 3),
                 (pane, warp) -> pane.addItem(new WarpItem(this, warp).item()));
 
-        for (int i = 0; i < panes.size(); i++) {
+        for (int i = 0 ; i < panes.size() ; i++) {
             warps.addPane(i, panes.get(i));
         }
 
-        Item<?> previous = new ArrowItem(this, ArrowItem.Direction.PREVIOUS, paginator, warps);
-        Item<?> next = new ArrowItem(this, ArrowItem.Direction.NEXT, paginator, warps);
+        Item<?> previous   = new ArrowItem(this, ArrowItem.Direction.PREVIOUS, paginator, warps);
+        Item<?> next       = new ArrowItem(this, ArrowItem.Direction.NEXT, paginator, warps);
         Item<?> playerList = new ListItem(this);
 
         StaticPane pagination = new StaticPane(0, 3, 9, 1);

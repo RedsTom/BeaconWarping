@@ -17,11 +17,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-public class PlayerItem extends Item<Menu<?>> {
+public class PlayerItem
+        extends Item<Menu<?>> {
+
     private final User user;
 
-    public PlayerItem(Menu<?> menu,
-                      User user) {
+    public PlayerItem(Menu<?> menu, User user) {
         super(menu, Material.PLAYER_HEAD);
 
         this.user = user;
@@ -30,22 +31,18 @@ public class PlayerItem extends Item<Menu<?>> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         ItemStack is = item.toItemStack();
         SkullMeta sm = (SkullMeta) is.getItemMeta();
 
         OfflinePlayer player = Bukkit.getOfflinePlayer(user.uniqueId());
-        sm.displayName(Component.text(player.getName() == null
-                                        ? "Joueur inconnu"
-                                        : player.getName())
-                                .color(TextColor.color(NamedTextColor.YELLOW))
-                                .decoration(TextDecoration.ITALIC, false));
+        sm.displayName(Component.text(player.getName() == null ? "Joueur inconnu" : player.getName())
+                .color(TextColor.color(NamedTextColor.YELLOW))
+                .decoration(TextDecoration.ITALIC, false));
         sm.setOwningPlayer(player);
 
         is.setItemMeta(sm);

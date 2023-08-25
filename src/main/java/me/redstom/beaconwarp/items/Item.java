@@ -2,16 +2,16 @@ package me.redstom.beaconwarp.items;
 
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import lombok.Getter;
-import me.redstom.beaconwarp.inventories.Menu;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
+import me.redstom.beaconwarp.inventories.Menu;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 @Getter
-public abstract class Item<T extends Menu<?>> {
+public abstract class Item <T extends Menu<?>> {
 
     protected final GuiItem item;
-    private final T menu;
+    private final   T       menu;
 
     protected Item(T menu, Material material) {
         this.menu = menu;
@@ -19,6 +19,7 @@ public abstract class Item<T extends Menu<?>> {
     }
 
     protected abstract void init();
+
     protected abstract ItemBuilder update(ItemBuilder item);
 
     public void update() {
@@ -27,5 +28,4 @@ public abstract class Item<T extends Menu<?>> {
 
         menu.gui().update();
     }
-
 }

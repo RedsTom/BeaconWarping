@@ -11,11 +11,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.function.Supplier;
 
-public class CancelItem extends Item<Menu<?>> {
+public class CancelItem
+        extends Item<Menu<?>> {
+
     private final Supplier<Menu<?>> previous;
 
-    public CancelItem(Menu<?> menu,
-                      Supplier<Menu<?>> previous) {
+    public CancelItem(Menu<?> menu, Supplier<Menu<?>> previous) {
         super(menu, Material.RED_WOOL);
 
         this.previous = previous;
@@ -24,16 +25,13 @@ public class CancelItem extends Item<Menu<?>> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Annuler")
-                                  .color(TextConstants.RED)
-                                  .decoration(TextDecoration.ITALIC, false), true);
+    @Override protected ItemBuilder update(ItemBuilder item) {
+        item.displayName(Component.text("Annuler").color(TextConstants.RED).decoration(TextDecoration.ITALIC, false),
+                true);
 
         return item;
     }
@@ -43,8 +41,7 @@ public class CancelItem extends Item<Menu<?>> {
         if ((menu = previous.get()) != null) {
             menu.open((Player) event.getWhoClicked());
         } else {
-            event.getWhoClicked()
-                 .closeInventory();
+            event.getWhoClicked().closeInventory();
         }
     }
 }

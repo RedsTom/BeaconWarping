@@ -13,7 +13,8 @@ import java.util.List;
 
 import static me.redstom.beaconwarp.items.ItemUtils.colorIfSame;
 
-public class PositionItem extends Item<EditionMenu> {
+public class PositionItem
+        extends Item<EditionMenu> {
 
     public PositionItem(EditionMenu menu) {
         super(menu, Material.COMPASS);
@@ -22,49 +23,32 @@ public class PositionItem extends Item<EditionMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text("Position d'apparition"));
 
-        item.lore(
+        item.lore(Component.text("» ")
+                        .append(Component.text("Au dessus").color(colorIfSame(menu().warp().side(), Warp.Side.TOP))),
                 Component.text("» ")
-                         .append(Component.text("Au dessus")
-                                          .color(colorIfSame(menu().warp()
-                                                                   .side(), Warp.Side.TOP))),
+                        .append(Component.text("Nord").color(colorIfSame(menu().warp().side(), Warp.Side.NORTH))),
                 Component.text("» ")
-                         .append(Component.text("Nord")
-                                          .color(colorIfSame(menu().warp()
-                                                                   .side(), Warp.Side.NORTH))),
+                        .append(Component.text("Est").color(colorIfSame(menu().warp().side(), Warp.Side.EAST))),
                 Component.text("» ")
-                         .append(Component.text("Est")
-                                          .color(colorIfSame(menu().warp()
-                                                                   .side(), Warp.Side.EAST))),
+                        .append(Component.text("Sud").color(colorIfSame(menu().warp().side(), Warp.Side.SOUTH))),
                 Component.text("» ")
-                         .append(Component.text("Sud")
-                                          .color(colorIfSame(menu().warp()
-                                                                   .side(), Warp.Side.SOUTH))),
-                Component.text("» ")
-                         .append(Component.text("Ouest")
-                                          .color(colorIfSame(menu().warp()
-                                                                   .side(), Warp.Side.WEST))));
+                        .append(Component.text("Ouest").color(colorIfSame(menu().warp().side(), Warp.Side.WEST))));
         return item;
     }
 
     private void onClick(InventoryClickEvent event) {
         List<Warp.Side> values = Arrays.asList(Warp.Side.values());
-        int index = values.indexOf(menu().warp()
-                                         .side());
+        int             index  = values.indexOf(menu().warp().side());
 
-        menu().warp()
-              .side(values.get((index + 1) % values.size()));
-        menu().repositories()
-              .warps()
-              .update(menu().warp());
+        menu().warp().side(values.get((index + 1) % values.size()));
+        menu().repositories().warps().update(menu().warp());
 
         update();
     }

@@ -5,9 +5,9 @@ import lombok.Getter;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
 import org.bukkit.entity.Player;
 
-public abstract class Menu<T extends Gui> {
+@Getter
+public abstract class Menu <T extends Gui> {
 
-    @Getter
     protected final T gui;
 
     protected Menu(T gui) {

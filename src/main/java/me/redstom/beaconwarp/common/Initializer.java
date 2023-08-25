@@ -5,5 +5,4 @@ import com.google.inject.Injector;
 public interface Initializer {
 
     void init(Injector injector);
-
 }

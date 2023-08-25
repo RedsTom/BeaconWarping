@@ -9,7 +9,8 @@ import org.bukkit.Material;
 
 import static me.redstom.beaconwarp.common.TextConstants.*;
 
-public class BeaconItem extends Item<RenamingMenu> {
+public class BeaconItem
+        extends Item<RenamingMenu> {
 
     public BeaconItem(RenamingMenu menu) {
         super(menu, Material.BEACON);
@@ -18,28 +19,20 @@ public class BeaconItem extends Item<RenamingMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         // Nothing to initiate
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text(menu().name()
-                                              .get())
-                                  .style(ITEM_NAME_STYLE)
-                                  .color(NamedTextColor.WHITE));
+    @Override protected ItemBuilder update(ItemBuilder item) {
+        item.displayName(Component.text(menu().name().get()).style(ITEM_NAME_STYLE).color(NamedTextColor.WHITE));
 
-        item.lore(Component.text("Nom actuel")
-                           .style(ITEM_LORE_STYLE),
+        item.lore(Component.text("Nom actuel").style(ITEM_LORE_STYLE),
                 Component.empty(),
                 Component.text()
-                         .append(Component.text("ESC")
-                                          .color(LIGHT_BLUE))
-                         .append(Component.text(" pour annuler"))
-                         .style(ITEM_LORE_STYLE)
-                         .build()
-        );
+                        .append(Component.text("ESC").color(LIGHT_BLUE))
+                        .append(Component.text(" pour " + "annuler"))
+                        .style(ITEM_LORE_STYLE)
+                        .build());
         return item;
     }
 }

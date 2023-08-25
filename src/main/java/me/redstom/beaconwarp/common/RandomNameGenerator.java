@@ -16,17 +16,12 @@ public class RandomNameGenerator {
     private final String[] names;
 
     public RandomNameGenerator() {
-        InputStream file = getClass().getClassLoader()
-                                     .getResourceAsStream("names.txt");
-        BufferedReader bis = new BufferedReader(new InputStreamReader(file));
-        this.names = bis.lines()
-                        .toArray(String[]::new);
+        InputStream    file = getClass().getClassLoader().getResourceAsStream("names.txt");
+        BufferedReader bis  = new BufferedReader(new InputStreamReader(file));
+        this.names = bis.lines().toArray(String[]::new);
     }
 
     public String pickOne() {
-        return Stream.of(names)
-                     .skip(RANDOM.nextInt(names.length))
-                     .findFirst()
-                     .orElseThrow();
+        return Stream.of(names).skip(RANDOM.nextInt(names.length)).findFirst().orElseThrow();
     }
 }

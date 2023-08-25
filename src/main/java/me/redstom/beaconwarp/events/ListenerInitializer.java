@@ -8,17 +8,14 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @Singleton
-public class ListenerInitializer implements Initializer {
+public class ListenerInitializer
+        implements Initializer {
 
-    @Inject
-    private JavaPlugin plugin;
+    @Inject private JavaPlugin plugin;
 
-    @Inject
-    private PluginManager pm;
+    @Inject private PluginManager pm;
 
-
-    @Override
-    public void init(Injector injector) {
+    @Override public void init(Injector injector) {
         pm.registerEvents(injector.getInstance(BlockPlaceListener.class), plugin);
         pm.registerEvents(injector.getInstance(PlayerInteractListener.class), plugin);
         pm.registerEvents(injector.getInstance(BlockBreakListener.class), plugin);

@@ -7,12 +7,12 @@ import me.redstom.beaconwarp.common.Initializer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @Singleton
-public class CommandInitializer implements Initializer {
+public class CommandInitializer
+        implements Initializer {
 
     @Inject private JavaPlugin plugin;
 
-    @Override
-    public void init(Injector injector) {
+    @Override public void init(Injector injector) {
         plugin.getCommand("pwarp").setExecutor(injector.getInstance(PWarpCommand.class));
     }
 }

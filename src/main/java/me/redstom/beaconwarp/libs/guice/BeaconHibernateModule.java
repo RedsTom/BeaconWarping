@@ -14,7 +14,8 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
 
-public class BeaconHibernateModule extends AbstractModule {
+public class BeaconHibernateModule
+        extends AbstractModule {
 
     private final JavaPlugin plugin;
 
@@ -22,19 +23,17 @@ public class BeaconHibernateModule extends AbstractModule {
         this.plugin = plugin;
     }
 
-    @Override
-    protected void configure() {
+    @Override protected void configure() {
         bind(SessionFactory.class).toInstance(this.createSessionFactory());
-
     }
 
     private SessionFactory createSessionFactory() {
-        FileConfiguration config = plugin.getConfig();
-        String url = config.getString("database.url");
-        String port = config.getString("database.port");
-        String name = config.getString("database.name");
-        String user = config.getString("database.user");
-        String password = config.getString("database.pass");
+        FileConfiguration config   = plugin.getConfig();
+        String            url      = config.getString("database.url");
+        String            port     = config.getString("database.port");
+        String            name     = config.getString("database.name");
+        String            user     = config.getString("database.user");
+        String            password = config.getString("database.pass");
 
         Properties settings = new Properties();
         settings.put(AvailableSettings.DRIVER, "org.postgresql.Driver");
@@ -45,14 +44,11 @@ public class BeaconHibernateModule extends AbstractModule {
         settings.put(AvailableSettings.SHOW_SQL, true);
         settings.put(AvailableSettings.HBM2DDL_AUTO, "update");
 
-        Configuration configuration = new Configuration()
-                .setProperties(settings)
-                .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Warp.class);
+        Configuration configuration =
+                new Configuration().setProperties(settings).addAnnotatedClass(User.class).addAnnotatedClass(Warp.class);
 
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties())
-                .build();
+        ServiceRegistry serviceRegistry =
+                new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
         return configuration.buildSessionFactory(serviceRegistry);
     }

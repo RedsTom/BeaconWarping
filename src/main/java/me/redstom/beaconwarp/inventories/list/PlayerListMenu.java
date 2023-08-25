@@ -8,6 +8,7 @@ import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import lombok.Getter;
 import me.redstom.beaconwarp.common.Paginator;
 import me.redstom.beaconwarp.inventories.Menu;
+import me.redstom.beaconwarp.items.Item;
 import me.redstom.beaconwarp.items.list.ArrowItem;
 import me.redstom.beaconwarp.items.list.PlayerItem;
 import me.redstom.beaconwarp.orm.entities.User;
@@ -21,13 +22,13 @@ import java.util.List;
 
 import static me.redstom.beaconwarp.common.TextConstants.*;
 
-public class PlayerListMenu extends Menu<ChestGui> {
+public class PlayerListMenu
+        extends Menu<ChestGui> {
 
-    private static final Component TITLE = SHORT_PREFIX.append(Component.text("Liste des joueurs")
-                                                                        .color(NamedTextColor.DARK_GRAY));
+    private static final Component TITLE =
+            SHORT_PREFIX.append(Component.text("Liste des joueurs").color(NamedTextColor.DARK_GRAY));
 
-    @Getter
-    private final Repositories repositories;
+    @Getter private final Repositories repositories;
 
     public PlayerListMenu(Repositories repositories) {
         super(new ChestGui(4, ComponentHolder.of(TITLE)));
@@ -37,23 +38,20 @@ public class PlayerListMenu extends Menu<ChestGui> {
         init();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         PaginatedPane players = new PaginatedPane(0, 0, 9, 3);
 
-        Paginator<User> paginator = new Paginator<>(repositories.users()
-                                                                .getAllWithWarp(), 3 * 9);
+        Paginator<User> paginator = new Paginator<>(repositories.users().getAllWithWarp(), 3 * 9);
 
-        List<OutlinePane> panes = paginator.generatePages(
-                () -> new OutlinePane(0, 0, 9, 3),
+        List<OutlinePane> panes = paginator.generatePages(() -> new OutlinePane(0, 0, 9, 3),
                 (pane, user) -> pane.addItem(new PlayerItem(this, user).item()));
 
-        for (int i = 0; i < panes.size(); i++) {
+        for (int i = 0 ; i < panes.size() ; i++) {
             players.addPane(i, panes.get(i));
         }
 
-        ArrowItem previous = new ArrowItem(this, ArrowItem.Direction.PREVIOUS, paginator, players);
-        ArrowItem next = new ArrowItem(this, ArrowItem.Direction.NEXT, paginator, players);
+        Item<?> previous = new ArrowItem(this, ArrowItem.Direction.PREVIOUS, paginator, players);
+        Item<?> next     = new ArrowItem(this, ArrowItem.Direction.NEXT, paginator, players);
 
         StaticPane pagination = new StaticPane(0, 3, 9, 1);
         pagination.addItem(previous.item(), 0, 0);
@@ -63,11 +61,10 @@ public class PlayerListMenu extends Menu<ChestGui> {
         gui.addPane(pagination);
     }
 
-    @Override
-    public void open(Player player) {
+    @Override public void open(Player player) {
         if (!player.hasPermission(new Permission("beacon.warp"))) {
-            player.sendMessage(PREFIX.append(Component.text("Vous n'avez pas la permission de vous téléporter aux warps des autres joueurs.")
-                                                      .color(RED)));
+            player.sendMessage(PREFIX.append(Component.text(
+                    "Vous n'avez pas la permission de vous téléporter aux " + "warps des autres joueurs.").color(RED)));
             return;
         }
 

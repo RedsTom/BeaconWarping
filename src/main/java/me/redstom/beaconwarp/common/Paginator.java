@@ -8,10 +8,10 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 @RequiredArgsConstructor
-public class Paginator<T> {
+public class Paginator <T> {
 
     private final List<T> list;
-    private final int pageSize;
+    private final int     pageSize;
 
     public List<T> page(int index) {
         return list.subList(index * pageSize, Math.min((index + 1) * pageSize, list.size()));
@@ -23,9 +23,9 @@ public class Paginator<T> {
 
     public <U> List<U> generatePages(Supplier<U> accumulatorSupplier, BiConsumer<U, T> filler) {
         List<U> accumulators = new ArrayList<>();
-        for (int i = 0; i < totalPageCount(); i++) {
-            U accumulator = accumulatorSupplier.get();
-            List<T> page = page(i);
+        for (int i = 0 ; i < totalPageCount() ; i++) {
+            U       accumulator = accumulatorSupplier.get();
+            List<T> page        = page(i);
             page.forEach(element -> filler.accept(accumulator, element));
             accumulators.add(accumulator);
         }

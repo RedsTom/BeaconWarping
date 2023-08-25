@@ -10,11 +10,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class IconChangeItem extends Item<IconSelectionMenu> {
+public class IconChangeItem
+        extends Item<IconSelectionMenu> {
+
     private final Material icon;
 
-    public IconChangeItem(IconSelectionMenu menu,
-                          Material icon) {
+    public IconChangeItem(IconSelectionMenu menu, Material icon) {
         super(menu, icon);
         this.icon = icon;
 
@@ -22,13 +23,11 @@ public class IconChangeItem extends Item<IconSelectionMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.translatable(icon).color(TextConstants.LIGHT_BLUE));
 
         return item;

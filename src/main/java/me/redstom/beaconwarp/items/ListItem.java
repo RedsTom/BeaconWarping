@@ -8,7 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class ListItem extends Item<Menu<?>> {
+public class ListItem
+        extends Item<Menu<?>> {
 
     public ListItem(Menu<?> menu) {
         super(menu, Material.FILLED_MAP);
@@ -17,13 +18,11 @@ public class ListItem extends Item<Menu<?>> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text("Liste des warps"));
         item.lore(Component.text("Aller à la liste des warps"));
 

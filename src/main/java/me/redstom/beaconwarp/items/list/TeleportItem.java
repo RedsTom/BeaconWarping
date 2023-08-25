@@ -11,7 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class TeleportItem extends Item<WarpMenu> {
+public class TeleportItem
+        extends Item<WarpMenu> {
+
     public TeleportItem(WarpMenu menu) {
         super(menu, Material.ENDER_PEARL);
 
@@ -19,13 +21,11 @@ public class TeleportItem extends Item<WarpMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
+    @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text("Se téléporter"));
 
         return item;
@@ -34,8 +34,8 @@ public class TeleportItem extends Item<WarpMenu> {
     private void onClick(InventoryClickEvent event) {
         Warp warp = menu().warp();
 
-        World world = Bukkit.getWorld(warp.world());
-        Location loc = warp.side().apply(new Location(world, warp.x(), warp.y(), warp.z()));
+        World    world = Bukkit.getWorld(warp.world());
+        Location loc   = warp.side().apply(new Location(world, warp.x(), warp.y(), warp.z()));
         loc.add(.5, 0, .5);
 
         event.getWhoClicked().teleport(loc);

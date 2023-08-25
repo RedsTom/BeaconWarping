@@ -19,23 +19,22 @@ import java.util.Optional;
 
 @Singleton
 public class WarpRepository {
-    @Inject SessionFactory sessionFactory;
+
+    @Inject SessionFactory      sessionFactory;
     @Inject RandomNameGenerator randomNameGenerator;
 
-    @Transactional
-    public Warp create(User user,
-                       Location location) {
+    @Transactional public Warp create(User user, Location location) {
         Warp warp = Warp.builder()
-                        .name(randomNameGenerator.pickOne())
-                        .world(location.getWorld().getName())
-                        .x(location.getBlockX())
-                        .y(location.getBlockY())
-                        .z(location.getBlockZ())
-                        .state(Warp.State.ENABLED)
-                        .side(Warp.Side.TOP)
-                        .icon(Material.COMPASS)
-                        .user(user)
-                        .build();
+                .name(randomNameGenerator.pickOne())
+                .world(location.getWorld().getName())
+                .x(location.getBlockX())
+                .y(location.getBlockY())
+                .z(location.getBlockZ())
+                .state(Warp.State.ENABLED)
+                .side(Warp.Side.TOP)
+                .icon(Material.COMPASS)
+                .user(user)
+                .build();
 
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
@@ -50,23 +49,19 @@ public class WarpRepository {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
 
-            CriteriaQuery<Warp> cr = cb.createQuery(Warp.class);
-            Root<Warp> root = cr.from(Warp.class);
+            CriteriaQuery<Warp> cr   = cb.createQuery(Warp.class);
+            Root<Warp>          root = cr.from(Warp.class);
 
             CriteriaQuery<Warp> query = cr.select(root)
-                                          .where(cb.and(
-                                                  cb.equal(root.get("x"), location.getBlockX()),
-                                                  cb.equal(root.get("y"), location.getBlockY()),
-                                                  cb.equal(root.get("z"), location.getBlockZ())
-                                          ));
+                    .where(cb.and(cb.equal(root.get("x"), location.getBlockX()),
+                            cb.equal(root.get("y"), location.getBlockY()),
+                            cb.equal(root.get("z"), location.getBlockZ())));
 
-            return Optional.ofNullable(session.createQuery(query)
-                                              .getSingleResultOrNull());
+            return Optional.ofNullable(session.createQuery(query).getSingleResultOrNull());
         }
     }
 
-    @Transactional
-    public void update(Warp warp) {
+    @Transactional public void update(Warp warp) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             session.merge(warp);
@@ -74,13 +69,11 @@ public class WarpRepository {
         }
     }
 
-    @Transactional
-    public void delete(Warp warp) {
+    @Transactional public void delete(Warp warp) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             session.remove(warp);
             tx.commit();
         }
     }
-
 }

@@ -9,7 +9,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static me.redstom.beaconwarp.common.TextConstants.ITEM_NAME_STYLE;
 
-public class ConfirmItem extends Item<RenamingMenu> {
+public class ConfirmItem
+        extends Item<RenamingMenu> {
+
     public ConfirmItem(RenamingMenu menu) {
         super(menu, Material.GREEN_WOOL);
 
@@ -17,15 +19,12 @@ public class ConfirmItem extends Item<RenamingMenu> {
         update();
     }
 
-    @Override
-    protected void init() {
+    @Override protected void init() {
         item.setAction(this::onClick);
     }
 
-    @Override
-    protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Confirmer")
-                                  .style(ITEM_NAME_STYLE));
+    @Override protected ItemBuilder update(ItemBuilder item) {
+        item.displayName(Component.text("Confirmer").style(ITEM_NAME_STYLE));
 
         return item;
     }
@@ -36,7 +35,6 @@ public class ConfirmItem extends Item<RenamingMenu> {
         menu().warp().name(menu().name().get());
         menu().repositories().warps().update(menu().warp());
 
-        event.getWhoClicked()
-             .closeInventory();
+        event.getWhoClicked().closeInventory();
     }
 }
