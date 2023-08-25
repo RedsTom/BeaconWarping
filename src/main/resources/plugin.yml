@@ -1,0 +1,26 @@
+name: BeaconWarp
+api-version: 1.20
+author: RedsTom
+version: 1.0
+main: me.redstom.beaconwarp.BeaconWarp
+commands:
+  pwarp:
+    description: Warp to a beacon
+    permission: beacon.warp
+    aliases:
+      - pwarps
+      - pw
+permissions:
+  beacon.create:
+    description: Allows to create and edit one's own warps
+    default: true
+  beacon.warp:
+    description: Allows to warp to a beacon
+    default: true
+  beacon.admin:
+    description: Allows to edit any warp
+    default: false
+libraries:
+  - org.postgresql:postgresql:42.6.0
+  - com.google.inject:guice:7.0.0
+  - org.hibernate.orm:hibernate-core:6.2.7.Final
