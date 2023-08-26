@@ -14,6 +14,9 @@ public class Components {
             .append(Component.text("»").color(Colors.WHITE))
             .appendSpace()
             .color(Colors.DARK_GRAY);
+            .append(Component.text("»").color(NamedTextColor.WHITE))
+            .appendSpace()
+            .color(NamedTextColor.DARK_GRAY);
 
     public static final Component PREFIX = Component.empty()
             .append(Component.text("Beacon").color(Colors.DARK_BLUE))
