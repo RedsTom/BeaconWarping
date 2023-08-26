@@ -9,15 +9,14 @@ import me.redstom.beaconwarp.items.CancelItem;
 import me.redstom.beaconwarp.items.list.TeleportItem;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
-
-import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
 @Getter
 public class WarpMenu
         extends Menu<HopperGui> {
 
-    private static final Component TITLE = SHORT_PREFIX.append(Component.text("Warp"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Warp"));
 
     private final Repositories repositories;
 

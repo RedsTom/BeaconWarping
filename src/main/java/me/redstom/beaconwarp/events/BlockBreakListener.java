@@ -2,9 +2,10 @@ package me.redstom.beaconwarp.events;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -37,20 +38,20 @@ public class BlockBreakListener
             event.setCancelled(true);
 
             OfflinePlayer other = Bukkit.getOfflinePlayer(warp.get().user().uniqueId());
-            player.sendMessage(TextConstants.PREFIX.append(Component.text(
+            player.sendMessage(Components.PREFIX.append(Component.text(
                             "Vous ne pouvez pas casser ce bloc car il abrite un warp qui appartient à ")
-                    .color(TextConstants.RED)
+                    .color(Colors.RED)
                     .append(Component.text(other.getName() == null ? "un joueur " + "inconnu" : other.getName())
-                            .color(TextConstants.LIGHT_BLUE))
+                            .color(Colors.LIGHT_BLUE))
                     .append(Component.text("."))));
 
             return;
         }
 
         repositories.warps().delete(warp.get());
-        player.sendMessage(TextConstants.PREFIX.append(Component.text("Le warp")
+        player.sendMessage(Components.PREFIX.append(Component.text("Le warp")
                 .appendSpace()
-                .append(Component.text(warp.get().name()).color(TextConstants.DARK_BLUE))
+                .append(Component.text(warp.get().name()).color(Colors.DARK_BLUE))
                 .appendSpace()
                 .append(Component.text("a bien été supprimé !"))));
     }

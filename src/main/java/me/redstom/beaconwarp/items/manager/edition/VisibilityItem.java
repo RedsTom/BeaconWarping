@@ -4,6 +4,7 @@ import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.manager.EditionMenu;
 import me.redstom.beaconwarp.items.Item;
 import me.redstom.beaconwarp.orm.entities.Warp;
+import me.redstom.beaconwarp.text.Styles;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -11,7 +12,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.Arrays;
 import java.util.List;
 
-import static me.redstom.beaconwarp.common.TextConstants.ITEM_NAME_STYLE;
 import static me.redstom.beaconwarp.items.ItemUtils.colorIfSame;
 
 public class VisibilityItem
@@ -30,7 +30,7 @@ public class VisibilityItem
 
     @Override protected ItemBuilder update(ItemBuilder item) {
 
-        item.displayName(Component.text("Visibilité").style(ITEM_NAME_STYLE));
+        item.displayName(Component.text("Visibilité").style(Styles.ITEM_NAME_STYLE));
         item.lore(Component.text("» ")
                         .append(Component.text("Activé").color(colorIfSame(menu().warp().state(), Warp.State.ENABLED))),
                 Component.text("» ")

@@ -1,11 +1,11 @@
 package me.redstom.beaconwarp.items.list;
 
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.list.WarpListMenu;
 import me.redstom.beaconwarp.inventories.list.WarpMenu;
 import me.redstom.beaconwarp.items.Item;
 import me.redstom.beaconwarp.orm.entities.Warp;
+import me.redstom.beaconwarp.text.Colors;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -32,7 +32,7 @@ public class WarpItem
 
         if (warp.state() == Warp.State.DISABLED) {
             item.lore(Component.text("Ce warp est desactivé, vous ne pouvez pas vous y téléporter !")
-                    .color(TextConstants.RED));
+                    .color(Colors.RED));
         }
 
         return item;

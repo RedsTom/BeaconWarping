@@ -4,25 +4,23 @@ import com.github.stefvanschie.inventoryframework.adventuresupport.ComponentHold
 import com.github.stefvanschie.inventoryframework.gui.type.HopperGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import lombok.Getter;
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.inventories.Menu;
 import me.redstom.beaconwarp.items.CancelItem;
 import me.redstom.beaconwarp.items.Item;
 import me.redstom.beaconwarp.items.manager.creation.CreateItem;
 import me.redstom.beaconwarp.orm.entities.User;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import static me.redstom.beaconwarp.common.TextConstants.PREFIX;
-import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
 @Getter
 public class CreationMenu
         extends Menu<HopperGui> {
 
-    private static final Component TITLE = SHORT_PREFIX.append(Component.text("Créer un warp"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Créer un warp"));
 
     private final Repositories repositories;
 
@@ -59,7 +57,7 @@ public class CreationMenu
         }
 
         player.closeInventory();
-        player.sendMessage(PREFIX.append(Component.text("Vous n'avez pas la permission de créer un warp !")
-                .color(TextConstants.RED)));
+        player.sendMessage(Components.PREFIX.append(Component.text("Vous n'avez pas la permission de créer un warp !")
+                .color(Colors.RED)));
     }
 }

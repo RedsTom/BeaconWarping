@@ -1,8 +1,8 @@
 package me.redstom.beaconwarp.items;
 
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.Menu;
+import me.redstom.beaconwarp.text.Colors;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
@@ -30,8 +30,7 @@ public class CancelItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Annuler").color(TextConstants.RED).decoration(TextDecoration.ITALIC, false),
-                true);
+        item.displayName(Component.text("Annuler").color(Colors.RED).decoration(TextDecoration.ITALIC, false), true);
 
         return item;
     }
