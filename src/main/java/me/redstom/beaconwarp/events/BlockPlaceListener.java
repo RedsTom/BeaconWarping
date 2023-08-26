@@ -4,15 +4,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import me.redstom.beaconwarp.orm.entities.User;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
-import me.redstom.beaconwarp.text.Colors;
 import me.redstom.beaconwarp.text.Components;
+import me.redstom.beaconwarp.text.info.InfoMessages;
+import me.redstom.beaconwarp.text.info.WarpExistenceNoticeTranslatableComponent;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.ComponentLike;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,6 +26,7 @@ public class BlockPlaceListener
     private static final Sound NOT_OK_SOUND = Sound.sound(Key.key("block.anvil.place"), Sound.Source.NEUTRAL, 1f, 1f);
 
     @Inject private Repositories repositories;
+    @Inject private InfoMessages infoMessages;
 
     @EventHandler public void onBlockPlace(BlockPlaceEvent event) {
         if (event.getBlockPlaced().getType() != Material.BEACON) {
@@ -41,23 +40,10 @@ public class BlockPlaceListener
             return;
         }
 
-        ComponentLike message = Components.PREFIX.append(Component.text(
-                        "Le saviez-vous ? En faisant clic droit lorsque vous êtes " + "accroupis sur cette " +
-                        "balise, vous pouvez configurer un warp auquel les autres " + "joueurs pourront se téléporter" +
-                        " via " + "la commande "))
-                .append(Component.text("/pwarps")
-                        .color(Colors.DARK_BLUE)
-                        .hoverEvent(HoverEvent.showText(Component.text("Cliquer pour suggérer")))
-                        .clickEvent(ClickEvent.suggestCommand("/pwarps")))
-                .append(Component.text("."))
-                .appendNewline()
-                .append(Component.text("[J'ai compris]")
-                        .color(Colors.GREEN)
-                        .clickEvent(ClickEvent.callback(audience -> stopInformingUser(user, audience))))
-                .appendSpace()
-                .append(Component.text("[Me le rappeler]")
-                        .color(Colors.ORANGE)
-                        .clickEvent(ClickEvent.callback(audience -> informNextTime(user, audience))));
+        Component message = infoMessages.warpExistenceNoticeMessage().build(args -> args
+                .put(WarpExistenceNoticeTranslatableComponent.Parameters.CONTINUE_ACTION, audience -> informNextTime(user, audience))
+                .put(WarpExistenceNoticeTranslatableComponent.Parameters.STOP_ACTION, audience -> stopInformingUser(user, audience)));
+
         player.sendMessage(message);
     }
 
@@ -74,7 +60,7 @@ public class BlockPlaceListener
         repositories.users().update(user);
 
         target.playSound(NOT_OK_SOUND, Sound.Emitter.self());
-        target.sendMessage(Components.PREFIX.append(Component.text(
-                "Un rappel vous sera envoyé la prochaine fois que vous " + "placerez une balise !")));
+        target.sendMessage(Components.PREFIX.append(
+                Component.text("Un rappel vous sera envoyé la prochaine fois que vous " + "placerez une balise !")));
     }
 }
