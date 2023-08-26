@@ -2,9 +2,10 @@ package me.redstom.beaconwarp.events;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.orm.entities.User;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
@@ -17,8 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-
-import static me.redstom.beaconwarp.common.TextConstants.*;
 
 @Singleton
 public class BlockPlaceListener
@@ -42,22 +41,22 @@ public class BlockPlaceListener
             return;
         }
 
-        ComponentLike message = TextConstants.PREFIX.append(Component.text(
+        ComponentLike message = Components.PREFIX.append(Component.text(
                         "Le saviez-vous ? En faisant clic droit lorsque vous êtes " + "accroupis sur cette " +
                         "balise, vous pouvez configurer un warp auquel les autres " + "joueurs pourront se téléporter" +
                         " via " + "la commande "))
                 .append(Component.text("/pwarps")
-                        .color(DARK_BLUE)
+                        .color(Colors.DARK_BLUE)
                         .hoverEvent(HoverEvent.showText(Component.text("Cliquer pour suggérer")))
                         .clickEvent(ClickEvent.suggestCommand("/pwarps")))
                 .append(Component.text("."))
                 .appendNewline()
                 .append(Component.text("[J'ai compris]")
-                        .color(GREEN)
+                        .color(Colors.GREEN)
                         .clickEvent(ClickEvent.callback(audience -> stopInformingUser(user, audience))))
                 .appendSpace()
                 .append(Component.text("[Me le rappeler]")
-                        .color(ORANGE)
+                        .color(Colors.ORANGE)
                         .clickEvent(ClickEvent.callback(audience -> informNextTime(user, audience))));
         player.sendMessage(message);
     }
@@ -67,7 +66,7 @@ public class BlockPlaceListener
         repositories.users().update(user);
 
         target.playSound(OK_SOUND, Sound.Emitter.self());
-        target.sendMessage(PREFIX.append(Component.text("Vous ne recevrez plus ces notifications !")));
+        target.sendMessage(Components.PREFIX.append(Component.text("Vous ne recevrez plus ces notifications !")));
     }
 
     private void informNextTime(User user, Audience target) {
@@ -75,7 +74,7 @@ public class BlockPlaceListener
         repositories.users().update(user);
 
         target.playSound(NOT_OK_SOUND, Sound.Emitter.self());
-        target.sendMessage(PREFIX.append(Component.text(
+        target.sendMessage(Components.PREFIX.append(Component.text(
                 "Un rappel vous sera envoyé la prochaine fois que vous " + "placerez une balise !")));
     }
 }

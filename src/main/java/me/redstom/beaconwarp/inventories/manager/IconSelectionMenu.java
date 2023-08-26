@@ -8,17 +8,16 @@ import me.redstom.beaconwarp.inventories.Menu;
 import me.redstom.beaconwarp.items.manager.iconselect.IconChangeItem;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
-import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
 @Getter
 public class IconSelectionMenu
         extends Menu<DropperGui> {
 
-    private static final Component  TITLE = SHORT_PREFIX.append(Component.text("Changer l'icône"));
+    private static final Component  TITLE = Components.SHORT_PREFIX.append(Component.text("Changer l'icône"));
     private static final Material[] ICONS =
             new Material[]{ Material.COMPASS, Material.RECOVERY_COMPASS, Material.GOLD_INGOT, Material.EMERALD,
                             Material.REDSTONE, Material.MINECART, Material.OAK_BOAT, Material.RED_BED,

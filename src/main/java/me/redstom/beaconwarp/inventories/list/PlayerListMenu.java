@@ -13,20 +13,18 @@ import me.redstom.beaconwarp.items.list.ArrowItem;
 import me.redstom.beaconwarp.items.list.PlayerItem;
 import me.redstom.beaconwarp.orm.entities.User;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 import java.util.List;
 
-import static me.redstom.beaconwarp.common.TextConstants.*;
-
 public class PlayerListMenu
         extends Menu<ChestGui> {
 
-    private static final Component TITLE =
-            SHORT_PREFIX.append(Component.text("Liste des joueurs").color(NamedTextColor.DARK_GRAY));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Liste des joueurs"));
 
     @Getter private final Repositories repositories;
 
@@ -63,8 +61,8 @@ public class PlayerListMenu
 
     @Override public void open(Player player) {
         if (!player.hasPermission(new Permission("beacon.warp"))) {
-            player.sendMessage(PREFIX.append(Component.text(
-                    "Vous n'avez pas la permission de vous téléporter aux " + "warps des autres joueurs.").color(RED)));
+            player.sendMessage(Components.PREFIX.append(Component.text(
+                    "Vous n'avez pas la permission de vous téléporter aux " + "warps des autres joueurs.").color(Colors.RED)));
             return;
         }
 

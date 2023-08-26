@@ -10,17 +10,16 @@ import me.redstom.beaconwarp.items.manager.rename.BeaconItem;
 import me.redstom.beaconwarp.items.manager.rename.ConfirmItem;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
-
 public class RenamingMenu
         extends Menu<AnvilGui> {
 
-    private static final Component TITLE = SHORT_PREFIX.append(Component.text("Renommer"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Renommer"));
 
     @Getter private final Repositories            repositories;
     @Getter private final Warp                    warp;

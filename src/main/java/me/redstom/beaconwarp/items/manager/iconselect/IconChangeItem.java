@@ -1,10 +1,10 @@
 package me.redstom.beaconwarp.items.manager.iconselect;
 
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.manager.EditionMenu;
 import me.redstom.beaconwarp.inventories.manager.IconSelectionMenu;
 import me.redstom.beaconwarp.items.Item;
+import me.redstom.beaconwarp.text.Colors;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,7 +28,7 @@ public class IconChangeItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable(icon).color(TextConstants.LIGHT_BLUE));
+        item.displayName(Component.translatable(icon).color(Colors.LIGHT_BLUE));
 
         return item;
     }

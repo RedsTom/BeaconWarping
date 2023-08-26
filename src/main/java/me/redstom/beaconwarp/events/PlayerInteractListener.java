@@ -2,12 +2,13 @@ package me.redstom.beaconwarp.events;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.inventories.manager.CreationMenu;
 import me.redstom.beaconwarp.inventories.manager.EditionMenu;
 import me.redstom.beaconwarp.orm.entities.User;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -44,9 +45,9 @@ public class PlayerInteractListener
         Beacon beacon = (Beacon) event.getClickedBlock().getState();
         if (beacon.getTier() < 1) {
             event.getPlayer()
-                    .sendMessage(TextConstants.PREFIX.append(Component.text(
+                    .sendMessage(Components.PREFIX.append(Component.text(
                                     "Votre balise doit être activée pour qu'un" + " warp puisse être actif")
-                            .color(TextConstants.RED)));
+                            .color(Colors.RED)));
             return;
         }
 
@@ -59,11 +60,11 @@ public class PlayerInteractListener
         if (!warp.get().user().uniqueId().equals(player.getUniqueId()) && !player.hasPermission("beacon.admin")) {
             OfflinePlayer other = Bukkit.getOfflinePlayer(warp.get().user().uniqueId());
 
-            player.sendMessage(TextConstants.PREFIX.append(Component.text(
+            player.sendMessage(Components.PREFIX.append(Component.text(
                             "Vous ne pouvez pas éditer ce warp car " + "il" + " appartient à ")
-                    .color(TextConstants.RED)
+                    .color(Colors.RED)
                     .append(Component.text(other.getName() == null ? "un joueur inconnu" : other.getName())
-                            .color(TextConstants.LIGHT_BLUE))
+                            .color(Colors.LIGHT_BLUE))
                     .append(Component.text("."))));
             return;
         }

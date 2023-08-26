@@ -3,11 +3,11 @@ package me.redstom.beaconwarp.items.manager.rename;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.manager.RenamingMenu;
 import me.redstom.beaconwarp.items.Item;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Styles;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 
-import static me.redstom.beaconwarp.common.TextConstants.*;
 
 public class BeaconItem
         extends Item<RenamingMenu> {
@@ -24,14 +24,14 @@ public class BeaconItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text(menu().name().get()).style(ITEM_NAME_STYLE).color(NamedTextColor.WHITE));
+        item.displayName(Component.text(menu().name().get()).style(Styles.ITEM_NAME_STYLE).color(Colors.WHITE));
 
-        item.lore(Component.text("Nom actuel").style(ITEM_LORE_STYLE),
+        item.lore(Component.text("Nom actuel").style(Styles.ITEM_LORE_STYLE),
                 Component.empty(),
                 Component.text()
-                        .append(Component.text("ESC").color(LIGHT_BLUE))
+                        .append(Component.text("ESC").color(Colors.LIGHT_BLUE))
                         .append(Component.text(" pour " + "annuler"))
-                        .style(ITEM_LORE_STYLE)
+                        .style(Styles.ITEM_LORE_STYLE)
                         .build());
         return item;
     }

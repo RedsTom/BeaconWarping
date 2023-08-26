@@ -5,8 +5,8 @@ import me.redstom.beaconwarp.inventories.Menu;
 import me.redstom.beaconwarp.inventories.list.WarpListMenu;
 import me.redstom.beaconwarp.items.Item;
 import me.redstom.beaconwarp.orm.entities.User;
+import me.redstom.beaconwarp.text.Colors;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -41,7 +41,7 @@ public class PlayerItem
 
         OfflinePlayer player = Bukkit.getOfflinePlayer(user.uniqueId());
         sm.displayName(Component.text(player.getName() == null ? "Joueur inconnu" : player.getName())
-                .color(TextColor.color(NamedTextColor.YELLOW))
+                .color(TextColor.color(Colors.ORANGE))
                 .decoration(TextDecoration.ITALIC, false));
         sm.setOwningPlayer(player);
 

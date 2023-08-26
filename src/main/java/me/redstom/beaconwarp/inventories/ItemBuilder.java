@@ -7,6 +7,7 @@
 
 package me.redstom.beaconwarp.inventories;
 
+import me.redstom.beaconwarp.text.Styles;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -14,9 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static me.redstom.beaconwarp.common.TextConstants.ITEM_LORE_STYLE;
-import static me.redstom.beaconwarp.common.TextConstants.ITEM_NAME_STYLE;
 
 public class ItemBuilder {
 
@@ -36,7 +34,7 @@ public class ItemBuilder {
 
     public ItemBuilder displayName(Component name, boolean enforceStyle) {
         if (!enforceStyle) {
-            name = name.style(ITEM_NAME_STYLE);
+            name = name.style(Styles.ITEM_NAME_STYLE);
         }
 
         ItemMeta im = this.item.getItemMeta();
@@ -52,7 +50,7 @@ public class ItemBuilder {
 
     public ItemBuilder lore(List<Component> lore, boolean enforceStyle) {
         if (!enforceStyle) {
-            lore = lore.stream().map(line -> line.style(ITEM_LORE_STYLE)).toList();
+            lore = lore.stream().map(line -> line.style(Styles.ITEM_LORE_STYLE)).toList();
         }
 
         ItemMeta im = item.getItemMeta();

@@ -5,6 +5,8 @@ import com.google.inject.Singleton;
 import io.papermc.paper.event.block.BeaconDeactivatedEvent;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -13,9 +15,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.Optional;
-
-import static me.redstom.beaconwarp.common.TextConstants.DARK_BLUE;
-import static me.redstom.beaconwarp.common.TextConstants.PREFIX;
 
 @Singleton
 public class BeaconListener
@@ -42,9 +41,9 @@ public class BeaconListener
 
         if (offlinePlayer.isOnline()) {
             Player player = (Player) offlinePlayer;
-            player.sendMessage(PREFIX.append(Component.text("Le warp")
+            player.sendMessage(Components.PREFIX.append(Component.text("Le warp")
                     .appendSpace()
-                    .append(Component.text(warp.name()).color(DARK_BLUE))
+                    .append(Component.text(warp.name()).color(Colors.DARK_BLUE))
                     .appendSpace()
                     .append(Component.text(
                             "a été désactivé : pour le réactiver, veuillez reconstruire son socle et remettre sa " +

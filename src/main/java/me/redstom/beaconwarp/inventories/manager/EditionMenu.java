@@ -10,14 +10,13 @@ import me.redstom.beaconwarp.items.ListItem;
 import me.redstom.beaconwarp.items.manager.edition.*;
 import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
-
-import static me.redstom.beaconwarp.common.TextConstants.SHORT_PREFIX;
 
 public class EditionMenu
         extends Menu<ChestGui> {
 
-    private static final Component TITLE = SHORT_PREFIX.append(Component.text("Configuration du warp"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Configuration du warp"));
 
     @Getter private final Warp         warp;
     @Getter private final Repositories repositories;

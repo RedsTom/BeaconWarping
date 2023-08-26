@@ -3,11 +3,11 @@ package me.redstom.beaconwarp.items.manager.edition;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.manager.EditionMenu;
 import me.redstom.beaconwarp.items.Item;
+import me.redstom.beaconwarp.text.Colors;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
-
-import static me.redstom.beaconwarp.common.TextConstants.*;
 
 public class DeleteItem
         extends Item<EditionMenu> {
@@ -29,7 +29,7 @@ public class DeleteItem
                 Component.text("Cette action est irréversible, aucune confirmation ne vous sera demandée !"),
                 Component.empty(),
                 Component.text()
-                        .append(Component.text("Clic droit").color(LIGHT_BLUE))
+                        .append(Component.text("Clic droit").color(Colors.LIGHT_BLUE))
                         .appendSpace()
                         .append(Component.text("pour confirmer"))
                         .build());
@@ -44,6 +44,6 @@ public class DeleteItem
 
         menu().repositories().warps().delete(menu().warp());
         event.getWhoClicked().closeInventory();
-        event.getWhoClicked().sendMessage(PREFIX.append(Component.text("Le warp a été supprimé").color(RED)));
+        event.getWhoClicked().sendMessage(Components.PREFIX.append(Component.text("Le warp a été supprimé").color(Colors.RED)));
     }
 }
