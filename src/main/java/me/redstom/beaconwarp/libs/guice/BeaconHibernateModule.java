@@ -42,7 +42,7 @@ public class BeaconHibernateModule
         settings.put(AvailableSettings.URL, "jdbc:postgresql://%s:%s/%s".formatted(url, port, name));
         settings.put(AvailableSettings.USER, user);
         settings.put(AvailableSettings.PASS, password);
-        if(debug) {
+        if (debug) {
             settings.put(AvailableSettings.SHOW_SQL, true);
             settings.put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
         } else {
