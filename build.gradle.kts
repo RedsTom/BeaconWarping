@@ -29,7 +29,7 @@ dependencies {
 
 tasks {
     assemble {
-        dependsOn("reobJar")
+        dependsOn("reobfJar")
     }
 
     compileJava {
