@@ -34,6 +34,7 @@ public class BeaconHibernateModule
         String            name     = config.getString("database.name");
         String            user     = config.getString("database.user");
         String            password = config.getString("database.pass");
+        boolean           debug    = config.contains("debug");
 
         Properties settings = new Properties();
         settings.put(AvailableSettings.DRIVER, "org.postgresql.Driver");
@@ -41,8 +42,12 @@ public class BeaconHibernateModule
         settings.put(AvailableSettings.URL, "jdbc:postgresql://%s:%s/%s".formatted(url, port, name));
         settings.put(AvailableSettings.USER, user);
         settings.put(AvailableSettings.PASS, password);
-        settings.put(AvailableSettings.SHOW_SQL, true);
-        settings.put(AvailableSettings.HBM2DDL_AUTO, "update");
+        if (debug) {
+            settings.put(AvailableSettings.SHOW_SQL, true);
+            settings.put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
+        } else {
+            settings.put(AvailableSettings.HBM2DDL_AUTO, "update");
+        }
 
         Configuration configuration =
                 new Configuration().setProperties(settings).addAnnotatedClass(User.class).addAnnotatedClass(Warp.class);

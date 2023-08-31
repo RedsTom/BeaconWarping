@@ -1,8 +1,10 @@
 package me.redstom.beaconwarp.commands;
 
 import com.google.inject.Inject;
+import me.redstom.beaconwarp.common.TextConstants;
 import me.redstom.beaconwarp.inventories.list.PlayerListMenu;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,9 +18,13 @@ public class PWarpCommand
 
     @Override public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
                                        @NotNull String[] args) {
+        if(!(sender instanceof Player player)) {
+            sender.sendMessage(Component.text("La console ne peut pas exécuter cette commande !").color(TextConstants.RED));
+            return false;
+        }
 
-        new PlayerListMenu(repositories).open((Player) sender);
+        new PlayerListMenu(repositories).open(player);
 
-        return false;
+        return true;
     }
 }
