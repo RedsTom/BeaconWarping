@@ -53,7 +53,7 @@ public class PlayerInteractListener
         Optional<Warp> warp = repositories.warps().findWarpOn(event.getClickedBlock().getLocation());
         if (warp.isEmpty()) {
             User user = repositories.users().getOrCreate(event.getPlayer().getUniqueId());
-            new CreationMenu(repositories, user, event.getClickedBlock().getLocation()).open(player);
+            new CreationMenu(player.locale(), repositories, user, event.getClickedBlock().getLocation()).open(player);
             return;
         }
         if (!warp.get().user().uniqueId().equals(player.getUniqueId()) && !player.hasPermission("beacon.admin")) {
@@ -65,6 +65,6 @@ public class PlayerInteractListener
             return;
         }
 
-        new EditionMenu(repositories, warp.get()).open(player);
+        new EditionMenu(player.locale(), repositories, warp.get()).open(player);
     }
 }

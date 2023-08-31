@@ -40,7 +40,7 @@ public class WarpItem
 
     private void onClick(InventoryClickEvent event) {
         if (warp.state() != Warp.State.DISABLED) {
-            new WarpMenu(menu().repositories(), warp).open((Player) event.getWhoClicked());
+            new WarpMenu(menu().locale(), menu().repositories(), warp).open((Player) event.getWhoClicked());
         }
     }
 }

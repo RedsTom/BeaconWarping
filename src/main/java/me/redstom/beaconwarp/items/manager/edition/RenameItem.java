@@ -36,6 +36,6 @@ public class RenameItem
     }
 
     private void onClick(InventoryClickEvent event) {
-        new RenamingMenu(menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
+        new RenamingMenu(menu().locale(), menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
     }
 }

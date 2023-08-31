@@ -30,6 +30,6 @@ public class ListItem
     }
 
     private void onClick(InventoryClickEvent event) {
-        new PlayerListMenu(menu().repositories()).open((Player) event.getWhoClicked());
+        new PlayerListMenu(menu().locale(), menu().repositories()).open((Player) event.getWhoClicked());
     }
 }

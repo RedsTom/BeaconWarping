@@ -32,7 +32,7 @@ public class WarpListMenu
     private final         User         user;
 
     public WarpListMenu(Locale locale, Repositories repositories, User user) {
-        super(new ChestGui(4, ComponentHolder.of(TITLE)));
+        super(new ChestGui(4, ComponentHolder.of(TITLE)), locale);
 
         this.repositories = repositories;
         this.user         = user;

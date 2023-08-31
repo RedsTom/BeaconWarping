@@ -51,6 +51,6 @@ public class PlayerItem
 
     private void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        new WarpListMenu(menu().repositories(), user).open(player);
+        new WarpListMenu(menu().locale(), menu().repositories(), user).open(player);
     }
 }

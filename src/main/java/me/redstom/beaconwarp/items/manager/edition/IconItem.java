@@ -34,6 +34,6 @@ public class IconItem
     }
 
     private void onClick(InventoryClickEvent event) {
-        new IconSelectionMenu(menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
+        new IconSelectionMenu(menu().locale(), menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
     }
 }

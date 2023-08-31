@@ -37,6 +37,6 @@ public class IconChangeItem
         menu().warp().icon(icon);
         menu().repositories().warps().update(menu().warp());
 
-        new EditionMenu(menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
+        new EditionMenu(menu().locale(), menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
     }
 }

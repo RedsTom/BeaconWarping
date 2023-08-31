@@ -34,6 +34,6 @@ public class CreateItem
     private void onClick(InventoryClickEvent event) {
         Warp warp = menu().repositories().warps().create(menu().user(), menu().location());
 
-        new EditionMenu(menu().repositories(), warp).open((Player) event.getWhoClicked());
+        new EditionMenu(menu().locale(), menu().repositories(), warp).open((Player) event.getWhoClicked());
     }
 }
