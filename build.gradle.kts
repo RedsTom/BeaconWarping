@@ -29,20 +29,20 @@ dependencies {
 
 tasks {
     assemble {
-        dependsOn("reobJar")
+        dependsOn("reobfJar")
     }
 
     compileJava {
-        options.encoding = "UTF-8"
+        options.encoding = Charsets.UTF_8.name()
         options.release.set(17)
     }
 
     javadoc {
-        options.encoding = "UTF-8"
+        options.encoding = Charsets.UTF_8.name()
     }
 
     processResources {
-        filteringCharset = "UTF-8"
+        filteringCharset = Charsets.UTF_8.name()
     }
 }
 
