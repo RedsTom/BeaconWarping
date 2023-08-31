@@ -12,6 +12,7 @@ import me.redstom.beaconwarp.orm.entities.Warp;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
 import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.translation.GlobalTranslator;
 import org.bukkit.entity.Player;
 
 import java.util.Locale;
@@ -28,7 +29,7 @@ public class RenamingMenu
     @Getter private final AtomicReference<String> name;
 
     public RenamingMenu(Locale locale, Repositories repositories, Warp warp) {
-        super(new AnvilGui(ComponentHolder.of(TITLE)), locale);
+        super(new AnvilGui(ComponentHolder.of(GlobalTranslator.render(TITLE, locale))), locale);
 
         this.repositories = repositories;
         this.warp         = warp;

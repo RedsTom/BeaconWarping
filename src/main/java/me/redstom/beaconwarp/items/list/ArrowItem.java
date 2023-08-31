@@ -33,7 +33,7 @@ public class ArrowItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable(direction.translationkey));
+        item.displayName(r(Component.translatable(direction.translationkey)));
 
         return item;
     }

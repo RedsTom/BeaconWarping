@@ -25,8 +25,8 @@ public class CreateItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("menus.warp-create.title"));
-        item.lore(Component.translatable("menus.warp-create.description"));
+        item.displayName(r(Component.translatable("menus.warp-create.title")));
+        item.lore(r(Component.translatable("menus.warp-create.description")));
 
         return item;
     }

@@ -25,7 +25,7 @@ public class ConfirmItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("confirm").style(ITEM_NAME_STYLE).color(Colors.GREEN));
+        item.displayName(r(Component.translatable("confirm").style(ITEM_NAME_STYLE).color(Colors.GREEN)));
 
         return item;
     }

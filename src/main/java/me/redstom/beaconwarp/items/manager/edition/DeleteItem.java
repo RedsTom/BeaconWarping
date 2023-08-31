@@ -24,11 +24,11 @@ public class DeleteItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("menus.warp-edit.delete.title"));
-        item.lore(Component.translatable("menus.warp-edit.delete.description"),
-                Component.translatable("menus.warp-edit.delete.warning"),
+        item.displayName(r(Component.translatable("menus.warp-edit.delete.title")));
+        item.lore(r(Component.translatable("menus.warp-edit.delete.description")),
+                r(Component.translatable("menus.warp-edit.delete.warning")),
                 Component.empty(),
-                Component.translatable("menus.warp-edit.delete.confirm"));
+                r(Component.translatable("menus.warp-edit.delete.confirm")));
 
         return item;
     }

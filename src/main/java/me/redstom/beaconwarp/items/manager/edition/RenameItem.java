@@ -25,12 +25,12 @@ public class RenameItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("menus.warp-edit.change-name.title"));
+        item.displayName(r(Component.translatable("menus.warp-edit.change-name.title")));
 
-        item.lore(Component.translatable("menus.warp-edit.change-name.description"),
+        item.lore(r(Component.translatable("menus.warp-edit.change-name.description")),
                 Component.empty(),
-                Component.translatable("menus.warp-edit.change-name.current-name")
-                        .args(Component.text(menu().warp().name()).color(Colors.LIGHT_BLUE)));
+                r(Component.translatable("menus.warp-edit.change-name.current-name")
+                        .args(Component.text(menu().warp().name()).color(Colors.LIGHT_BLUE))));
 
         return item;
     }

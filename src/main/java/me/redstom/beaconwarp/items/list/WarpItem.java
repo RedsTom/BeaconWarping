@@ -31,8 +31,7 @@ public class WarpItem
         item.displayName(Component.text(warp.name()));
 
         if (warp.state() == Warp.State.DISABLED) {
-            item.lore(Component.translatable("menus.list.warps.disabled-item")
-                    .color(Colors.RED));
+            item.lore(r(Component.translatable("menus.list.warps.disabled-item").color(Colors.RED)));
         }
 
         return item;

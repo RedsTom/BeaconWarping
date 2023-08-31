@@ -30,13 +30,13 @@ public class StateItem
 
     @Override protected ItemBuilder update(ItemBuilder item) {
 
-        item.displayName(Component.translatable("menus.warp-edit.state.title").style(Styles.ITEM_NAME_STYLE));
-        item.lore(Component.text("» ")
+        item.displayName(r(Component.translatable("menus.warp-edit.state.title").style(Styles.ITEM_NAME_STYLE)));
+        item.lore(r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.state.enabled")
-                                .color(colorIfSame(menu().warp().state(), Warp.State.ENABLED))),
-                Component.text("» ")
+                                .color(colorIfSame(menu().warp().state(), Warp.State.ENABLED)))),
+                r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.state.disabled")
-                                .color(colorIfSame(menu().warp().state(), Warp.State.DISABLED))));
+                                .color(colorIfSame(menu().warp().state(), Warp.State.DISABLED)))));
 
         return item;
     }

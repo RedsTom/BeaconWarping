@@ -25,15 +25,16 @@ public class IconItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("menus.warp-edit.change-icon.title"));
-        item.lore(Component.translatable("menus.warp-edit.change-icon.description"),
-                Component.translatable("menus.warp-edit.change-icon.current-icon")
-                        .args(Component.translatable(menu().warp().icon()).color(Colors.LIGHT_BLUE)));
+        item.displayName(r(Component.translatable("menus.warp-edit.change-icon.title")));
+        item.lore(r(Component.translatable("menus.warp-edit.change-icon.description")),
+                r(Component.translatable("menus.warp-edit.change-icon.current-icon")
+                        .args(Component.translatable(menu().warp().icon()).color(Colors.LIGHT_BLUE))));
 
         return item;
     }
 
     private void onClick(InventoryClickEvent event) {
-        new IconSelectionMenu(menu().locale(), menu().repositories(), menu().warp()).open((Player) event.getWhoClicked());
+        new IconSelectionMenu(menu().locale(), menu().repositories(), menu().warp()).open(
+                (Player) event.getWhoClicked());
     }
 }

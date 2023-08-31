@@ -28,28 +28,28 @@ public class PositionItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("menus.warp-edit.position.title"));
+        item.displayName(r(Component.translatable("menus.warp-edit.position.title")));
 
-        item.lore(Component.text("» ")
+        item.lore(r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.position.top")
                                 .color(colorIfSame(menu().warp().side(),
-                                        Warp.Side.TOP))),
-                Component.text("» ")
+                                        Warp.Side.TOP)))),
+                r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.position.north")
                                 .color(colorIfSame(menu().warp().side(),
-                                        Warp.Side.NORTH))),
-                Component.text("» ")
+                                        Warp.Side.NORTH)))),
+                r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.position.east")
                                 .color(colorIfSame(menu().warp().side(),
-                                        Warp.Side.EAST))),
-                Component.text("» ")
+                                        Warp.Side.EAST)))),
+                r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.position.south")
                                 .color(colorIfSame(menu().warp().side(),
-                                        Warp.Side.SOUTH))),
-                Component.text("» ")
+                                        Warp.Side.SOUTH)))),
+                r(Component.text("» ")
                         .append(Component.translatable("menus.warp-edit.position.west")
                                 .color(colorIfSame(menu().warp().side(),
-                                        Warp.Side.WEST))));
+                                        Warp.Side.WEST)))));
         return item;
     }
 

@@ -23,8 +23,8 @@ public class ListItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.translatable("menus.list.warps.title"));
-        item.lore(Component.translatable("menus.list.warps.description"));
+        item.displayName(r(Component.translatable("menus.list.warps.title")));
+        item.lore(r(Component.translatable("menus.list.warps.description")));
 
         return item;
     }

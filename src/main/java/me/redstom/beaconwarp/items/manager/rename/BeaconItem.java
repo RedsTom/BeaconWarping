@@ -24,11 +24,11 @@ public class BeaconItem
     @Override protected ItemBuilder update(ItemBuilder item) {
         item.displayName(Component.text(menu().name().get()).color(Colors.WHITE));
 
-        item.lore(Component.translatable("menus.warp-edit.change-name.current-name")
-                        .args(Component.text(menu().warp().name()).color(Colors.LIGHT_BLUE)),
+        item.lore(r(Component.translatable("menus.warp-edit.change-name.current-name")
+                        .args(Component.text(menu().warp().name()).color(Colors.LIGHT_BLUE))),
                 Component.empty(),
-                Component.translatable("menus.warp-edit.change-name.cancel")
-                        .args(Component.text("ESC").color(Colors.LIGHT_BLUE)));
+                r(Component.translatable("menus.warp-edit.change-name.cancel")
+                        .args(Component.text("ESC").color(Colors.LIGHT_BLUE))));
         return item;
     }
 }

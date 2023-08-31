@@ -4,6 +4,8 @@ import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import lombok.Getter;
 import me.redstom.beaconwarp.inventories.ItemBuilder;
 import me.redstom.beaconwarp.inventories.Menu;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.translation.GlobalTranslator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,5 +29,9 @@ public abstract class Item <T extends Menu<?>> {
         item.setItem(update(builder).toItemStack());
 
         menu.gui().update();
+    }
+
+    protected Component r(Component component) {
+        return GlobalTranslator.render(component, menu.locale());
     }
 }
