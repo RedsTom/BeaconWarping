@@ -45,8 +45,7 @@ public class PlayerInteractListener
         Beacon beacon = (Beacon) event.getClickedBlock().getState();
         if (beacon.getTier() < 1) {
             event.getPlayer()
-                    .sendMessage(Components.PREFIX.append(Component.text(
-                                    "Votre balise doit être activée pour qu'un" + " warp puisse être actif")
+                    .sendMessage(Components.PREFIX.append(Component.translatable("info.beacon-edit.must-be-activated")
                             .color(Colors.RED)));
             return;
         }
@@ -60,12 +59,9 @@ public class PlayerInteractListener
         if (!warp.get().user().uniqueId().equals(player.getUniqueId()) && !player.hasPermission("beacon.admin")) {
             OfflinePlayer other = Bukkit.getOfflinePlayer(warp.get().user().uniqueId());
 
-            player.sendMessage(Components.PREFIX.append(Component.text(
-                            "Vous ne pouvez pas éditer ce warp car " + "il" + " appartient à ")
+            player.sendMessage(Components.PREFIX.append(Component.translatable("info.beacon-edit.not-yours")
                     .color(Colors.RED)
-                    .append(Component.text(other.getName() == null ? "un joueur inconnu" : other.getName())
-                            .color(Colors.LIGHT_BLUE))
-                    .append(Component.text("."))));
+                    .args(Components.playerName(other))));
             return;
         }
 

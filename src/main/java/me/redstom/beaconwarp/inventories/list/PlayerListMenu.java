@@ -20,16 +20,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 import java.util.List;
+import java.util.Locale;
 
 public class PlayerListMenu
         extends Menu<ChestGui> {
 
-    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Liste des joueurs"));
+    private static final Component TITLE =
+            Components.SHORT_PREFIX.append(Component.translatable("menus.list.players.title"));
 
     @Getter private final Repositories repositories;
 
-    public PlayerListMenu(Repositories repositories) {
-        super(new ChestGui(4, ComponentHolder.of(TITLE)));
+    public PlayerListMenu(Locale locale, Repositories repositories) {
+        super(new ChestGui(4, ComponentHolder.of(TITLE)), locale);
 
         this.repositories = repositories;
 
@@ -61,8 +63,8 @@ public class PlayerListMenu
 
     @Override public void open(Player player) {
         if (!player.hasPermission(new Permission("beacon.warp"))) {
-            player.sendMessage(Components.PREFIX.append(Component.text(
-                    "Vous n'avez pas la permission de vous téléporter aux " + "warps des autres joueurs.").color(Colors.RED)));
+            player.sendMessage(Components.PREFIX.append(Component.translatable("no-permissions.warp")
+                    .color(Colors.RED)));
             return;
         }
 

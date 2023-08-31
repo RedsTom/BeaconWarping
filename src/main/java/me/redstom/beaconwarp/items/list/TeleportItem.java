@@ -26,7 +26,7 @@ public class TeleportItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Se téléporter"));
+        item.displayName(Component.translatable("menus.list.warp.teleport"));
 
         return item;
     }

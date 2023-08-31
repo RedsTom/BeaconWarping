@@ -30,7 +30,8 @@ public class CancelItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Annuler").color(Colors.RED).decoration(TextDecoration.ITALIC, false), true);
+        item.displayName(Component.translatable("cancel").color(Colors.RED).decoration(TextDecoration.ITALIC, false),
+                true);
 
         return item;
     }

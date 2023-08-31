@@ -31,7 +31,7 @@ public class WarpItem
         item.displayName(Component.text(warp.name()));
 
         if (warp.state() == Warp.State.DISABLED) {
-            item.lore(Component.text("Ce warp est desactivé, vous ne pouvez pas vous y téléporter !")
+            item.lore(Component.translatable("menus.list.warps.disabled-item")
                     .color(Colors.RED));
         }
 

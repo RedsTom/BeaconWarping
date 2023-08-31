@@ -17,4 +17,8 @@ public class Colors {
     public static final TextColor DARK_GRAY  = NamedTextColor.DARK_GRAY;
     public static final TextColor LIGHT_GRAY = NamedTextColor.GRAY;
     public static final TextColor WHITE      = NamedTextColor.WHITE;
+
+    public static <T> TextColor colorIfSame(T expected, T actual) {
+        return expected == actual ? Colors.GREEN : Colors.DARK_GRAY;
+    }
 }

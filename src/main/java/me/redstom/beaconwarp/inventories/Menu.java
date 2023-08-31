@@ -5,13 +5,17 @@ import lombok.Getter;
 import me.redstom.beaconwarp.orm.repositories.Repositories;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
+
 @Getter
 public abstract class Menu <T extends Gui> {
 
-    protected final T gui;
+    protected final T      gui;
+    protected final Locale locale;
 
-    protected Menu(T gui) {
+    protected Menu(T gui, Locale locale) {
         this.gui = gui;
+        this.locale = locale;
 
         gui.setOnGlobalClick(event -> event.setCancelled(true));
         gui.setOnGlobalDrag(event -> event.setCancelled(true));

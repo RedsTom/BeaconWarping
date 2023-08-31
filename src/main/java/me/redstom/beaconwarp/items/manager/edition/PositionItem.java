@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.Arrays;
 import java.util.List;
 
-import static me.redstom.beaconwarp.items.ItemUtils.colorIfSame;
+import static me.redstom.beaconwarp.text.Colors.colorIfSame;
 
 public class PositionItem
         extends Item<EditionMenu> {
@@ -28,18 +28,28 @@ public class PositionItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Position d'apparition"));
+        item.displayName(Component.translatable("menus.warp-edit.position.title"));
 
         item.lore(Component.text("» ")
-                        .append(Component.text("Au dessus").color(colorIfSame(menu().warp().side(), Warp.Side.TOP))),
+                        .append(Component.translatable("menus.warp-edit.position.top")
+                                .color(colorIfSame(menu().warp().side(),
+                                        Warp.Side.TOP))),
                 Component.text("» ")
-                        .append(Component.text("Nord").color(colorIfSame(menu().warp().side(), Warp.Side.NORTH))),
+                        .append(Component.translatable("menus.warp-edit.position.north")
+                                .color(colorIfSame(menu().warp().side(),
+                                        Warp.Side.NORTH))),
                 Component.text("» ")
-                        .append(Component.text("Est").color(colorIfSame(menu().warp().side(), Warp.Side.EAST))),
+                        .append(Component.translatable("menus.warp-edit.position.east")
+                                .color(colorIfSame(menu().warp().side(),
+                                        Warp.Side.EAST))),
                 Component.text("» ")
-                        .append(Component.text("Sud").color(colorIfSame(menu().warp().side(), Warp.Side.SOUTH))),
+                        .append(Component.translatable("menus.warp-edit.position.south")
+                                .color(colorIfSame(menu().warp().side(),
+                                        Warp.Side.SOUTH))),
                 Component.text("» ")
-                        .append(Component.text("Ouest").color(colorIfSame(menu().warp().side(), Warp.Side.WEST))));
+                        .append(Component.translatable("menus.warp-edit.position.west")
+                                .color(colorIfSame(menu().warp().side(),
+                                        Warp.Side.WEST))));
         return item;
     }
 

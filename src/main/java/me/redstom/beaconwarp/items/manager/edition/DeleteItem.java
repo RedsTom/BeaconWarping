@@ -24,15 +24,11 @@ public class DeleteItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Supprimer"));
-        item.lore(Component.text("Supprimer le warp."),
-                Component.text("Cette action est irréversible, aucune confirmation ne vous sera demandée !"),
+        item.displayName(Component.translatable("menus.warp-edit.delete.title"));
+        item.lore(Component.translatable("menus.warp-edit.delete.description"),
+                Component.translatable("menus.warp-edit.delete.warning"),
                 Component.empty(),
-                Component.text()
-                        .append(Component.text("Clic droit").color(Colors.LIGHT_BLUE))
-                        .appendSpace()
-                        .append(Component.text("pour confirmer"))
-                        .build());
+                Component.translatable("menus.warp-edit.delete.confirm"));
 
         return item;
     }
@@ -44,6 +40,8 @@ public class DeleteItem
 
         menu().repositories().warps().delete(menu().warp());
         event.getWhoClicked().closeInventory();
-        event.getWhoClicked().sendMessage(Components.PREFIX.append(Component.text("Le warp a été supprimé").color(Colors.RED)));
+        event.getWhoClicked()
+                .sendMessage(Components.PREFIX.append(
+                        Component.translatable("menus.warp-edit.delete.done").color(Colors.RED)));
     }
 }

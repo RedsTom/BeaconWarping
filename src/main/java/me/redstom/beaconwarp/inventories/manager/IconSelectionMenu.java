@@ -13,11 +13,14 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
+
 @Getter
 public class IconSelectionMenu
         extends Menu<DropperGui> {
 
-    private static final Component  TITLE = Components.SHORT_PREFIX.append(Component.text("Changer l'icône"));
+    private static final Component  TITLE =
+            Components.SHORT_PREFIX.append(Component.translatable("menus.warp-edit.change-icon.title"));
     private static final Material[] ICONS =
             new Material[]{ Material.COMPASS, Material.RECOVERY_COMPASS, Material.GOLD_INGOT, Material.EMERALD,
                             Material.REDSTONE, Material.MINECART, Material.OAK_BOAT, Material.RED_BED,
@@ -27,8 +30,8 @@ public class IconSelectionMenu
 
     private final Warp warp;
 
-    public IconSelectionMenu(Repositories repositories, Warp warp) {
-        super(new DropperGui(ComponentHolder.of(TITLE)));
+    public IconSelectionMenu(Locale locale, Repositories repositories, Warp warp) {
+        super(new DropperGui(ComponentHolder.of(TITLE)), locale);
 
         this.repositories = repositories;
         this.warp         = warp;
@@ -44,6 +47,6 @@ public class IconSelectionMenu
         }
 
         gui.getContentsComponent().addPane(icons);
-        gui.setOnClose(event -> new EditionMenu(repositories, warp).open((Player) event.getPlayer()));
+        gui.setOnClose(event -> new EditionMenu(locale, repositories, warp).open((Player) event.getPlayer()));
     }
 }

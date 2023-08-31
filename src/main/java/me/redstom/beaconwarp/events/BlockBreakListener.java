@@ -38,21 +38,15 @@ public class BlockBreakListener
             event.setCancelled(true);
 
             OfflinePlayer other = Bukkit.getOfflinePlayer(warp.get().user().uniqueId());
-            player.sendMessage(Components.PREFIX.append(Component.text(
-                            "Vous ne pouvez pas casser ce bloc car il abrite un warp qui appartient à ")
+            player.sendMessage(Components.PREFIX.append(Component.translatable("info.beacon-break.not-yours")
                     .color(Colors.RED)
-                    .append(Component.text(other.getName() == null ? "un joueur " + "inconnu" : other.getName())
-                            .color(Colors.LIGHT_BLUE))
-                    .append(Component.text("."))));
+                    .args(Components.playerName(other))));
 
             return;
         }
 
         repositories.warps().delete(warp.get());
-        player.sendMessage(Components.PREFIX.append(Component.text("Le warp")
-                .appendSpace()
-                .append(Component.text(warp.get().name()).color(Colors.DARK_BLUE))
-                .appendSpace()
-                .append(Component.text("a bien été supprimé !"))));
+        player.sendMessage(Components.PREFIX.append(Component.translatable("info.beacon-break.ok")
+                .args(Component.text(warp.get().name()).color(Colors.DARK_BLUE))));
     }
 }

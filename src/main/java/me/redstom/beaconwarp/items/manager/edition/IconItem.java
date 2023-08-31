@@ -25,10 +25,10 @@ public class IconItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Icône"));
-        item.lore(Component.text("Changer l'icône du warp"),
-                Component.text("Actuellement : ")
-                        .append(Component.translatable(menu().warp().icon()).color(Colors.LIGHT_BLUE)));
+        item.displayName(Component.translatable("menus.warp-edit.change-icon.title"));
+        item.lore(Component.translatable("menus.warp-edit.change-icon.description"),
+                Component.translatable("menus.warp-edit.change-icon.current-icon")
+                        .args(Component.translatable(menu().warp().icon()).color(Colors.LIGHT_BLUE)));
 
         return item;
     }

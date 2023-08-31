@@ -14,19 +14,21 @@ import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class RenamingMenu
         extends Menu<AnvilGui> {
 
-    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Renommer"));
+    private static final Component TITLE =
+            Components.SHORT_PREFIX.append(Component.translatable("menus.warp-edit.change-name.title"));
 
     @Getter private final Repositories            repositories;
     @Getter private final Warp                    warp;
     @Getter private final AtomicReference<String> name;
 
-    public RenamingMenu(Repositories repositories, Warp warp) {
-        super(new AnvilGui(ComponentHolder.of(TITLE)));
+    public RenamingMenu(Locale locale, Repositories repositories, Warp warp) {
+        super(new AnvilGui(ComponentHolder.of(TITLE)), locale);
 
         this.repositories = repositories;
         this.warp         = warp;
@@ -52,6 +54,6 @@ public class RenamingMenu
         gui.getResultComponent().addPane(output);
 
         gui.setOnNameInputChanged(name::set);
-        gui.setOnClose(event -> new EditionMenu(repositories, warp).open((Player) event.getPlayer()));
+        gui.setOnClose(event -> new EditionMenu(locale, repositories, warp).open((Player) event.getPlayer()));
     }
 }

@@ -41,8 +41,10 @@ public class BlockPlaceListener
         }
 
         Component message = infoMessages.warpExistenceNoticeMessage().build(args -> args
-                .put(WarpExistenceNoticeTranslatableComponent.Parameters.CONTINUE_ACTION, audience -> informNextTime(user, audience))
-                .put(WarpExistenceNoticeTranslatableComponent.Parameters.STOP_ACTION, audience -> stopInformingUser(user, audience)));
+                .put(WarpExistenceNoticeTranslatableComponent.Parameters.CONTINUE_ACTION,
+                        audience -> informNextTime(user, audience))
+                .put(WarpExistenceNoticeTranslatableComponent.Parameters.STOP_ACTION,
+                        audience -> stopInformingUser(user, audience)));
 
         player.sendMessage(message);
     }
@@ -52,7 +54,7 @@ public class BlockPlaceListener
         repositories.users().update(user);
 
         target.playSound(OK_SOUND, Sound.Emitter.self());
-        target.sendMessage(Components.PREFIX.append(Component.text("Vous ne recevrez plus ces notifications !")));
+        target.sendMessage(Components.PREFIX.append(Component.translatable("info.beacon-place.buttons.ok.confirm")));
     }
 
     private void informNextTime(User user, Audience target) {
@@ -60,7 +62,7 @@ public class BlockPlaceListener
         repositories.users().update(user);
 
         target.playSound(NOT_OK_SOUND, Sound.Emitter.self());
-        target.sendMessage(Components.PREFIX.append(
-                Component.text("Un rappel vous sera envoyé la prochaine fois que vous " + "placerez une balise !")));
+        target.sendMessage(
+                Components.PREFIX.append(Component.translatable("info.beacon-place.buttons.remind-me.confirm")));
     }
 }

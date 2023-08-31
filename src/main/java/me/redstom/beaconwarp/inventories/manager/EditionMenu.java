@@ -13,10 +13,13 @@ import me.redstom.beaconwarp.orm.repositories.Repositories;
 import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 
+import java.util.Locale;
+
 public class EditionMenu
         extends Menu<ChestGui> {
 
-    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Configuration du warp"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.translatable(
+            "menus.warp-edit.title"));
 
     @Getter private final Warp         warp;
     @Getter private final Repositories repositories;
@@ -25,8 +28,8 @@ public class EditionMenu
     private Item<?> position;
     private Item<?> visibility;
 
-    public EditionMenu(Repositories repositories, Warp warp) {
-        super(new ChestGui(5, ComponentHolder.of(TITLE)));
+    public EditionMenu(Locale locale, Repositories repositories, Warp warp) {
+        super(new ChestGui(5, ComponentHolder.of(TITLE)), locale);
 
         this.repositories = repositories;
         this.warp         = warp;
@@ -37,7 +40,7 @@ public class EditionMenu
     @Override public void init() {
         this.rename     = new RenameItem(this);
         this.position   = new PositionItem(this);
-        this.visibility = new VisibilityItem(this);
+        this.visibility = new StateItem(this);
         Item<?> icon   = new IconItem(this);
         Item<?> delete = new DeleteItem(this);
         Item<?> list   = new ListItem(this);

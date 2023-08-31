@@ -33,8 +33,7 @@ public class ArrowItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Page %s".formatted(
-                direction == Direction.PREVIOUS ? "précédente" : "suivante")));
+        item.displayName(Component.translatable(direction.translationkey));
 
         return item;
     }
@@ -47,9 +46,10 @@ public class ArrowItem
 
     @RequiredArgsConstructor
     public enum Direction {
-        PREVIOUS(-1),
-        NEXT(1);
+        PREVIOUS(-1, "menus.list.previous"),
+        NEXT(1, "menus.list.next");
 
         private final int offset;
+        private final String translationkey;
     }
 }

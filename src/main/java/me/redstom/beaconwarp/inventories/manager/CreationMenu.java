@@ -16,11 +16,14 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
+
 @Getter
 public class CreationMenu
         extends Menu<HopperGui> {
 
-    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Créer un warp"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.translatable(
+            "menus.warp-create.title"));
 
     private final Repositories repositories;
 
@@ -28,8 +31,8 @@ public class CreationMenu
 
     private final Location location;
 
-    public CreationMenu(Repositories repositories, User user, Location location) {
-        super(new HopperGui(ComponentHolder.of(TITLE)));
+    public CreationMenu(Locale locale, Repositories repositories, User user, Location location) {
+        super(new HopperGui(ComponentHolder.of(TITLE)), locale);
         this.repositories = repositories;
         this.user         = user;
         this.location     = location;
@@ -38,10 +41,8 @@ public class CreationMenu
     }
 
     public void init() {
-        Item<?> cancel;
-        Item<?> create;
-        create = new CreateItem(this);
-        cancel = new CancelItem(this, () -> null);
+        Item<?> create = new CreateItem(this);
+        Item<?> cancel = new CancelItem(this, () -> null);
 
         StaticPane pane = new StaticPane(0, 0, 5, 1);
         pane.addItem(create.item(), 1, 0);
@@ -51,13 +52,12 @@ public class CreationMenu
     }
 
     @Override public void open(Player player) {
-        if (player.hasPermission("beacon.create")) {
-            super.open(player);
+        if (!player.hasPermission("beacon.create")) {
+            player.sendMessage(Components.PREFIX.append(Component.translatable("no-permissions.create")
+                    .color(Colors.RED)));
             return;
         }
 
-        player.closeInventory();
-        player.sendMessage(Components.PREFIX.append(Component.text("Vous n'avez pas la permission de créer un warp !")
-                .color(Colors.RED)));
+        super.open(player);
     }
 }

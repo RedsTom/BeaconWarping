@@ -12,18 +12,21 @@ import me.redstom.beaconwarp.orm.repositories.Repositories;
 import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.Component;
 
+import java.util.Locale;
+
 @Getter
 public class WarpMenu
         extends Menu<HopperGui> {
 
-    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Warp"));
+    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.translatable(
+            "menus.list.warp.title"));
 
     private final Repositories repositories;
 
     private final Warp warp;
 
-    public WarpMenu(Repositories repositories, Warp warp) {
-        super(new HopperGui(ComponentHolder.of(TITLE)));
+    public WarpMenu(Locale locale, Repositories repositories, Warp warp) {
+        super(new HopperGui(ComponentHolder.of(TITLE)), locale);
 
         this.repositories = repositories;
         this.warp         = warp;
@@ -33,7 +36,7 @@ public class WarpMenu
 
     @Override public void init() {
         TeleportItem teleport = new TeleportItem(this);
-        CancelItem   cancel   = new CancelItem(this, () -> new WarpListMenu(repositories, warp.user()));
+        CancelItem   cancel   = new CancelItem(this, () -> new WarpListMenu(locale, repositories, warp.user()));
 
         StaticPane pane = new StaticPane(0, 0, 5, 1);
         pane.addItem(teleport.item(), 1, 0);

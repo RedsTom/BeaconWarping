@@ -41,13 +41,9 @@ public class BeaconListener
 
         if (offlinePlayer.isOnline()) {
             Player player = (Player) offlinePlayer;
-            player.sendMessage(Components.PREFIX.append(Component.text("Le warp")
-                    .appendSpace()
-                    .append(Component.text(warp.name()).color(Colors.DARK_BLUE))
-                    .appendSpace()
-                    .append(Component.text(
-                            "a été désactivé : pour le réactiver, veuillez reconstruire son socle et remettre sa " +
-                            "visibilité en \"public\" !"))));
+
+            player.sendMessage(Components.PREFIX.append(Component.translatable("info.beacon-deactivate.body")
+                    .args(Component.text(warp.name()).color(Colors.DARK_BLUE))));
         }
     }
 }

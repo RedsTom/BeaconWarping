@@ -24,8 +24,7 @@ public class WarpExistenceNoticeTranslatableComponent
                 .appendSpace()
                 .append(Component.text("/pwarps")
                         .color(Colors.DARK_BLUE)
-                        .hoverEvent(HoverEvent.showText(Component.translatable("info.beacon-place.buttons" +
-                                                                               ".click-to-suggest")))
+                        .hoverEvent(HoverEvent.showText(Component.translatable("info.beacon-place.buttons.click-to-suggest")))
                         .clickEvent(ClickEvent.suggestCommand("/pwarps")))
                 .append(Component.text("."))
                 .appendNewline()
@@ -41,8 +40,8 @@ public class WarpExistenceNoticeTranslatableComponent
     @UtilityClass
     public class Parameters {
 
-        public final ComponentArg<Callback> CONTINUE_ACTION = new ComponentArg<>(Callback.class);
-        public final ComponentArg<Callback> STOP_ACTION     = new ComponentArg<>(Callback.class);
+        public final ComponentArg<Callback> CONTINUE_ACTION = new ComponentArg<>("Continue", Callback.class);
+        public final ComponentArg<Callback> STOP_ACTION     = new ComponentArg<>("Stop", Callback.class);
     }
 
     @FunctionalInterface

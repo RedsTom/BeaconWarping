@@ -12,12 +12,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.Arrays;
 import java.util.List;
 
-import static me.redstom.beaconwarp.items.ItemUtils.colorIfSame;
+import static me.redstom.beaconwarp.text.Colors.colorIfSame;
 
-public class VisibilityItem
+public class StateItem
         extends Item<EditionMenu> {
 
-    public VisibilityItem(EditionMenu menu) {
+    public StateItem(EditionMenu menu) {
         super(menu, Material.TRIPWIRE_HOOK);
 
         init();
@@ -30,11 +30,12 @@ public class VisibilityItem
 
     @Override protected ItemBuilder update(ItemBuilder item) {
 
-        item.displayName(Component.text("Visibilité").style(Styles.ITEM_NAME_STYLE));
+        item.displayName(Component.translatable("menus.warp-edit.state.title").style(Styles.ITEM_NAME_STYLE));
         item.lore(Component.text("» ")
-                        .append(Component.text("Activé").color(colorIfSame(menu().warp().state(), Warp.State.ENABLED))),
+                        .append(Component.translatable("menus.warp-edit.state.enabled")
+                                .color(colorIfSame(menu().warp().state(), Warp.State.ENABLED))),
                 Component.text("» ")
-                        .append(Component.text("Désactivé")
+                        .append(Component.translatable("menus.warp-edit.state.disabled")
                                 .color(colorIfSame(menu().warp().state(), Warp.State.DISABLED))));
 
         return item;

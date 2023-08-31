@@ -20,17 +20,18 @@ import net.kyori.adventure.text.Component;
 
 import java.util.Comparator;
 import java.util.List;
-
+import java.util.Locale;
 
 public class WarpListMenu
         extends Menu<ChestGui> {
 
-    private static final Component TITLE = Components.SHORT_PREFIX.append(Component.text("Liste des warps"));
+    private static final Component TITLE =
+            Components.SHORT_PREFIX.append(Component.translatable("menus.list.warps.title"));
 
     @Getter private final Repositories repositories;
     private final         User         user;
 
-    public WarpListMenu(Repositories repositories, User user) {
+    public WarpListMenu(Locale locale, Repositories repositories, User user) {
         super(new ChestGui(4, ComponentHolder.of(TITLE)));
 
         this.repositories = repositories;

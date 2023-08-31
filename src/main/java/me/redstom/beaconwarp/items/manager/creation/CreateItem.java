@@ -25,10 +25,8 @@ public class CreateItem
     }
 
     @Override protected ItemBuilder update(ItemBuilder item) {
-        item.displayName(Component.text("Créer le warp"));
-        item.lore(Component.text("Crée un nouveau warp à votre nom. Votre warp,"),
-                Component.text("une fois créé, pourra téléporter les joueurs"),
-                Component.text("au niveau de votre balise."));
+        item.displayName(Component.translatable("menus.warp-create.title"));
+        item.lore(Component.translatable("menus.warp-create.description"));
 
         return item;
     }

@@ -6,7 +6,7 @@ import me.redstom.beaconwarp.inventories.list.WarpListMenu;
 import me.redstom.beaconwarp.items.Item;
 import me.redstom.beaconwarp.orm.entities.User;
 import me.redstom.beaconwarp.text.Colors;
-import net.kyori.adventure.text.Component;
+import me.redstom.beaconwarp.text.Components;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -40,7 +40,7 @@ public class PlayerItem
         SkullMeta sm = (SkullMeta) is.getItemMeta();
 
         OfflinePlayer player = Bukkit.getOfflinePlayer(user.uniqueId());
-        sm.displayName(Component.text(player.getName() == null ? "Joueur inconnu" : player.getName())
+        sm.displayName(Components.playerName(player)
                 .color(TextColor.color(Colors.ORANGE))
                 .decoration(TextDecoration.ITALIC, false));
         sm.setOwningPlayer(player);
